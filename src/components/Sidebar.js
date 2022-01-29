@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { Box, Drawer, makeStyles } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Drawer } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const DrawerStyle = styled(Drawer)({
   width: 240,
@@ -21,7 +21,7 @@ const Sidebar = () => {
     >
       <div>
         <Box>
-          <Typography variant="h4">E-Library</Typography>
+          <Typography variant="h5">E-Library</Typography>
         </Box>
       </div>
     </DrawerStyle>

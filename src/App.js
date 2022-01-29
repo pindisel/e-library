@@ -6,6 +6,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   typography: {
     fontFamily: "Montserrat",
+    button: {
+      textTransform: "none",
+    },
+  },
+  palette: {
+    green: {
+      main: "#007C4B",
+      contrastText: "#fff",
+    },
   },
 });
 
@@ -17,7 +26,7 @@ function App() {
           <Layout>
             <Routes>
               <Route exact path="/" element={<Dashboard />} />
-              <Route exact path="/keloladata" element={<KelolaData />} />
+              <Route exact path="/kelola-data" element={<KelolaData />} />
             </Routes>
           </Layout>
         </Router>
