@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   TableContainer,
@@ -15,9 +15,10 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { dataBuku } from "../dataBuku";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import axios from "axios";
+//aapa
 
 const SubHeading = styled("div")({
   backgroundColor: "#6F8197",
@@ -27,9 +28,40 @@ const SubHeading = styled("div")({
 });
 
 const KelolaData = () => {
+  const [judul, setJudul] = useState();
+  const [pengarang, setPengarang] = useState();
+  const [penerbit, setPenerbit] = useState();
+  const [tahun, setTahun] = useState();
+
+  const getBooks = async () => {
+    try {
+      const response = await fetch("https://elibrary-back.herokuapp.com/buku");
+      const data = await response.json();
+
+      setBook(data);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  const addBook = async () => {
+    await axios
+      .post("https://elibrary-back.herokuapp.com/buku", {
+        judul: judul,
+        pengarang: pengarang,
+        penerbit: penerbit,
+        tahun: tahun,
+      })
+      .then((window.location = "/kelola-data"));
+  };
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [datas, setDataBuku] = useState(dataBuku);
+  const [datas, setBook] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -93,13 +125,37 @@ const KelolaData = () => {
       >
         <Box component="form" sx={ModalBoxStyle} noValidate autoComplete="off">
           <div>
-            <TextField label="Judul" variant="outlined" sx={{ mr: 2 }} />
-            <TextField label="Pengarang" variant="outlined" sx={{ mr: 2 }} />
-            <TextField label="Penerbit" variant="outlined" sx={{ mr: 2 }} />
-            <TextField label="Tahun" variant="outlined" />
+            <TextField
+              label="Judul"
+              variant="outlined"
+              sx={{ mr: 2 }}
+              required
+              onChange={(e) => setJudul(e.target.value)}
+            />
+            <TextField
+              label="Pengarang"
+              variant="outlined"
+              sx={{ mr: 2 }}
+              required
+              onChange={(e) => setPengarang(e.target.value)}
+            />
+            <TextField
+              label="Penerbit"
+              variant="outlined"
+              sx={{ mr: 2 }}
+              required
+              onChange={(e) => setPenerbit(e.target.value)}
+            />
+            <TextField
+              label="Tahun"
+              variant="outlined"
+              required
+              onChange={(e) => setTahun(e.target.value)}
+            />
           </div>
           <div style={{ width: "100%" }}>
             <Button
+              onClick={() => addBook()}
               variant="contained"
               color="green"
               style={{
@@ -146,8 +202,8 @@ const KelolaData = () => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => (
                 <TableRow key={data.id}>
-                  <TableCell align="center">{data.no}</TableCell>
                   <TableCell align="center">{data.id}</TableCell>
+                  <TableCell align="center">{data.idbuku}</TableCell>
                   <TableCell align="center">{data.judul}</TableCell>
                   <TableCell align="center">{data.pengarang}</TableCell>
                   <TableCell align="center">{data.penerbit}</TableCell>
