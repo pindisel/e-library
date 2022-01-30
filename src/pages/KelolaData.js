@@ -25,6 +25,17 @@ const SubHeading = styled("div")({
 });
 
 const KelolaData = () => {
+  const deleteBook = async (id) => {
+    try {
+      await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
+        method: "DELETE",
+      });
+      window.location = "/kelola-data";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [books, setBooks] = useState([]);
@@ -124,7 +135,10 @@ const KelolaData = () => {
                     <IconButton color="green">
                       <FiEdit />
                     </IconButton>
-                    <IconButton color="error">
+                    <IconButton
+                      onClick={() => deleteBook(data.id)}
+                      color="error"
+                    >
                       <FiTrash2 />
                     </IconButton>
                   </TableCell>
