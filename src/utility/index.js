@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://elibrary-back.herokuapp.com";
 
 async function http(method, headers, endpoint, body = null, data) {
   // const headers = { "Content-Type": "application/x-www-form-urlencoded" };

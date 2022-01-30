@@ -4,7 +4,7 @@ async function getBooks() {
   const body = {};
   const response = await gatewayHelper.http(
     "GET",
-    { "Content-Type": "application/json" },
+    { "Content-Type": "application/x-www-form-urlencoded" },
     "buku",
     body
   );
@@ -12,10 +12,11 @@ async function getBooks() {
 }
 
 async function addBooks(data) {
-  const body = {};
+  const body = {
+  };
   const response = await gatewayHelper.http(
     "POST",
-    { "Content-Type": "application/json" },
+    { "Content-Type": "application/json; charset=utf-8" },
     "buku",
     body,
     data

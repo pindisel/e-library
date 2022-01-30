@@ -11,12 +11,21 @@ const InputModal = ({ open, handleClose }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8000/buku", {
-      judul: judul,
-      pengarang: pengarang,
-      penerbit: penerbit,
-      tahun: tahun,
+    // const response = await axios.post("http://localhost:8000/buku", {
+    //   judul: judul,
+    //   pengarang: pengarang,
+    //   penerbit: penerbit,
+    //   tahun: tahun,
+    // });
+    const response = await BookService.addBooks({
+      data: {
+        judul: "jonathan",
+        pengarang: "jonathan",
+        penerbit: "jonathan",
+        tahun: "2001",
+      },
     });
+    console.log(response);
     // console.log(judul, pengarang, penerbit, tahun);
     // handleClose();
   };
