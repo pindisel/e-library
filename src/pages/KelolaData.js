@@ -18,7 +18,6 @@ import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import axios from "axios";
-//aapa
 
 const SubHeading = styled("div")({
   backgroundColor: "#6F8197",
