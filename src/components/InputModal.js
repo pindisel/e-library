@@ -18,15 +18,13 @@ const InputModal = ({ open, handleClose }) => {
     //   tahun: tahun,
     // });
     const response = await BookService.addBooks({
-      data: {
-        judul: "jonathan",
-        pengarang: "jonathan",
-        penerbit: "jonathan",
-        tahun: "2001",
-      },
+      judul: judul,
+      pengarang: pengarang,
+      penerbit: penerbit,
+      tahun: tahun,
     });
+    console.log(judul, pengarang, penerbit, tahun);
     console.log(response);
-    // console.log(judul, pengarang, penerbit, tahun);
     // handleClose();
   };
 

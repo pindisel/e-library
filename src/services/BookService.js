@@ -12,11 +12,10 @@ async function getBooks() {
 }
 
 async function addBooks(data) {
-  const body = {
-  };
+  const body = {};
   const response = await gatewayHelper.http(
     "POST",
-    { "Content-Type": "application/json; charset=utf-8" },
+    { "Content-Type": "application/json" },
     "buku",
     body,
     data
