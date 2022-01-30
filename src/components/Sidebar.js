@@ -12,9 +12,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
@@ -28,6 +25,7 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PrintIcon from "@mui/icons-material/Print";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -58,12 +56,14 @@ function Sidebar(props) {
           </ListSubheader>
         }
       >
-        <ListItemButton>
-          <ListItemIcon>
-            <SpeedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
+        <Link to="/" style={{ textDecoration: 'none',color:'inherit' }}>
+          <ListItemButton>
+            <ListItemIcon>
+              <SpeedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </Link>
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             <FolderIcon />
@@ -73,12 +73,14 @@ function Sidebar(props) {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Data Buku" />
-            </ListItemButton>
+            <Link to="/kelola-data" style={{ textDecoration: 'none',color:'inherit' }}>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Data Buku" />
+              </ListItemButton>
+            </Link>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <StarBorder />
