@@ -10,14 +10,12 @@ import {
   TablePagination,
   IconButton,
   Button,
-  Modal,
-  Box,
-  TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import axios from "axios";
+import { InputModal } from "../components";
+import { BookService } from "../services/BookService";
 
 const SubHeading = styled("div")({
   backgroundColor: "#6F8197",
@@ -27,37 +25,6 @@ const SubHeading = styled("div")({
 });
 
 const KelolaData = () => {
-  const [judul, setJudul] = useState();
-  const [pengarang, setPengarang] = useState();
-  const [penerbit, setPenerbit] = useState();
-  const [tahun, setTahun] = useState();
-
-  const getBooks = async () => {
-    try {
-      const response = await fetch("https://elibrary-back.herokuapp.com/buku");
-      const data = await response.json();
-
-      setBook(data);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getBooks();
-  }, []);
-
-  const addBook = async () => {
-    await axios
-      .post("https://elibrary-back.herokuapp.com/buku", {
-        judul: judul,
-        pengarang: pengarang,
-        penerbit: penerbit,
-        tahun: tahun,
-      })
-      .then((window.location = "/kelola-data"));
-  };
-
   const deleteBook = async (id) => {
     try {
       await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
@@ -71,10 +38,20 @@ const KelolaData = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [datas, setBook] = useState([]);
+  const [books, setBooks] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const fetchBuku = async () => {
+      const response = await BookService.getBooks();
+      const data = response.data;
+      setBooks(data);
+    };
+
+    fetchBuku();
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -86,19 +63,7 @@ const KelolaData = () => {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - datas.length) : 0;
-
-  const ModalBoxStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "fit-content",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 3,
-  };
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
 
   return (
     <>
@@ -127,59 +92,7 @@ const KelolaData = () => {
       >
         <Typography variant="subtitle1">Tambah Buku</Typography>
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box component="form" sx={ModalBoxStyle} noValidate autoComplete="off">
-          <div>
-            <TextField
-              label="Judul"
-              variant="outlined"
-              sx={{ mr: 2 }}
-              required
-              onChange={(e) => setJudul(e.target.value)}
-            />
-            <TextField
-              label="Pengarang"
-              variant="outlined"
-              sx={{ mr: 2 }}
-              required
-              onChange={(e) => setPengarang(e.target.value)}
-            />
-            <TextField
-              label="Penerbit"
-              variant="outlined"
-              sx={{ mr: 2 }}
-              required
-              onChange={(e) => setPenerbit(e.target.value)}
-            />
-            <TextField
-              label="Tahun"
-              variant="outlined"
-              required
-              onChange={(e) => setTahun(e.target.value)}
-            />
-          </div>
-          <div style={{ width: "100%" }}>
-            <Button
-              onClick={() => addBook()}
-              variant="contained"
-              color="green"
-              style={{
-                borderRadius: 10,
-              }}
-              sx={{
-                mt: 2,
-              }}
-            >
-              <Typography variant="subtitle1">Done</Typography>
-            </Button>
-          </div>
-        </Box>
-      </Modal>
+      <InputModal open={open} handleClose={() => handleClose()}></InputModal>
       <TableContainer>
         <Table>
           <TableHead>
@@ -208,7 +121,7 @@ const KelolaData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {datas
+            {books
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => (
                 <TableRow key={data.id}>
@@ -245,7 +158,7 @@ const KelolaData = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={datas.length}
+        count={books.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
