@@ -21,6 +21,13 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import FolderIcon from "@mui/icons-material/Folder";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SpeedIcon from "@mui/icons-material/Speed";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PrintIcon from "@mui/icons-material/Print";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 const drawerWidth = 240;
 
@@ -53,15 +60,15 @@ function Sidebar(props) {
       >
         <ListItemButton>
           <ListItemIcon>
-            <SendIcon />
+            <SpeedIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItemButton>
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
-            <InboxIcon />
+            <FolderIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="Kelola data" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
@@ -82,19 +89,19 @@ function Sidebar(props) {
         </Collapse>{" "}
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <ChangeCircleIcon />
           </ListItemIcon>
           <ListItemText primary="Sirkulasi" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <MenuBookIcon />
           </ListItemIcon>
           <ListItemText primary="Log Data" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <PrintIcon />
           </ListItemIcon>
           <ListItemText primary="Laporan" />
         </ListItemButton>
@@ -113,13 +120,13 @@ function Sidebar(props) {
       >
         <ListItemButton>
           <ListItemIcon>
-            <SendIcon />
+            <AccountBoxIcon />
           </ListItemIcon>
           <ListItemText primary="Pengguna Sistem" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <LogoutIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItemButton>
