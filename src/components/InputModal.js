@@ -10,14 +10,38 @@ const InputModal = ({ openInput, handleCloseInput }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await BookService.addBooks({
+    const data = {
       judul: judul,
       pengarang: pengarang,
       penerbit: penerbit,
       tahun: tahun,
+    };
+    var dataKosong = [];
+
+    for (const key in data) {
+      if (data[key] === null || data[key].match(/^\s*$/) !== null) {
+        dataKosong.push(key.charAt(0).toUpperCase() + key.slice(1));
+      }
+    }
+
+    dataKosong.forEach((item, index, arr) => {
+      if (index !== 0) {
+        arr[index] = " " + item;
+      }
     });
-    window.location = "/kelola-data";
-    handleCloseInput();
+
+    if (dataKosong.length === 0) {
+      await BookService.addBooks(data);
+      window.location = "/kelola-data";
+      handleCloseInput();
+    } else {
+      alert(dataKosong + " tidak dapat kosong");
+    }
+
+    try {
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const ModalBoxStyle = {

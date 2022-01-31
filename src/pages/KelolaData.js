@@ -126,7 +126,7 @@ const KelolaData = () => {
               <TableCell align="center" width={50}>
                 Tahun
               </TableCell>
-              <TableCell align="center" width={100}>
+              <TableCell align="center" width={150}>
                 Kelola
               </TableCell>
             </TableRow>
