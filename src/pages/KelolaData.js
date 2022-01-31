@@ -134,9 +134,11 @@ const KelolaData = () => {
           <TableBody>
             {books
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((data) => (
+              .map((data, index) => (
                 <TableRow key={data.id}>
-                  <TableCell align="center">{data.id}</TableCell>
+                  <TableCell align="center">
+                    {page * rowsPerPage + (index + 1)}
+                  </TableCell>
                   <TableCell align="center">{data.idbuku}</TableCell>
                   <TableCell align="center">{data.judul}</TableCell>
                   <TableCell align="center">{data.pengarang}</TableCell>
