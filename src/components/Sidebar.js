@@ -12,15 +12,20 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import FolderIcon from "@mui/icons-material/Folder";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SpeedIcon from "@mui/icons-material/Speed";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PrintIcon from "@mui/icons-material/Print";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -51,27 +56,31 @@ function Sidebar(props) {
           </ListSubheader>
         }
       >
-        <ListItemButton>
-          <ListItemIcon>
-            <SendIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
+        <Link to="/" style={{ textDecoration: 'none',color:'inherit' }}>
+          <ListItemButton>
+            <ListItemIcon>
+              <SpeedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </Link>
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
-            <InboxIcon />
+            <FolderIcon />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="Kelola data" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Data Buku" />
-            </ListItemButton>
+            <Link to="/kelola-data" style={{ textDecoration: 'none',color:'inherit' }}>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Data Buku" />
+              </ListItemButton>
+            </Link>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <StarBorder />
@@ -82,19 +91,19 @@ function Sidebar(props) {
         </Collapse>{" "}
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <ChangeCircleIcon />
           </ListItemIcon>
           <ListItemText primary="Sirkulasi" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <MenuBookIcon />
           </ListItemIcon>
           <ListItemText primary="Log Data" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <PrintIcon />
           </ListItemIcon>
           <ListItemText primary="Laporan" />
         </ListItemButton>
@@ -113,13 +122,13 @@ function Sidebar(props) {
       >
         <ListItemButton>
           <ListItemIcon>
-            <SendIcon />
+            <AccountBoxIcon />
           </ListItemIcon>
           <ListItemText primary="Pengguna Sistem" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <DraftsIcon />
+            <LogoutIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItemButton>
