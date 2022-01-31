@@ -15,7 +15,7 @@ const AddEditModal = ({ open, handleClose, datas }) => {
       setPenerbit(datas.penerbit);
       setTahun(datas.tahun);
     }
-  }, [datas !== null ? datas : null]);
+  }, [datas]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

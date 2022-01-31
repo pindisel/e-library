@@ -14,7 +14,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { InputModal, EditModal, AddEditModal } from "../components";
+import { AddEditModal } from "../components";
 import { BookService } from "../services/BookService";
 
 const SubHeading = styled("div")({
@@ -40,7 +40,6 @@ const KelolaData = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [edit, setEdit] = useState(false);
   const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -94,7 +93,6 @@ const KelolaData = () => {
         style={{ borderRadius: 10 }}
         onClick={() => {
           handleOpen();
-          setEdit(false);
         }}
       >
         <Typography variant="subtitle1">Tambah Buku</Typography>
@@ -144,7 +142,6 @@ const KelolaData = () => {
                     <IconButton
                       color="green"
                       onClick={() => {
-                        setEdit(true);
                         setDataModal(data);
                         handleOpen();
                       }}
