@@ -2,31 +2,58 @@ import React, { useEffect, useState } from "react";
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import { BookService } from "../services/BookService";
 
-const EditModal = ({ openEdit, handleCloseEdit, datas }) => {
-  // console.log(datas);
-  const [judul, setJudul] = useState();
-  const [pengarang, setPengarang] = useState();
-  const [penerbit, setPenerbit] = useState();
-  const [tahun, setTahun] = useState();
+const AddEditModal = ({ open, handleClose, datas }) => {
+  const [judul, setJudul] = useState("");
+  const [pengarang, setPengarang] = useState("");
+  const [penerbit, setPenerbit] = useState("");
+  const [tahun, setTahun] = useState("");
 
   useEffect(() => {
-    console.log(datas.judul);
-    setJudul(datas.judul);
-    setPengarang(datas.pengarang);
-    setPenerbit(datas.penerbit);
-    setTahun(datas.tahun);
-  }, [datas.judul, datas.pengarang, datas.penerbit, datas.tahun]);
+    if (datas !== null) {
+      setJudul(datas.judul);
+      setPengarang(datas.pengarang);
+      setPenerbit(datas.penerbit);
+      setTahun(datas.tahun);
+    }
+  }, [datas !== null ? datas : null]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await BookService.editBooks(datas.id, {
+    const data = {
       judul: judul,
       pengarang: pengarang,
       penerbit: penerbit,
       tahun: tahun,
+    };
+    var dataKosong = [];
+    for (const key in data) {
+      if (data[key] === null || data[key].match(/^\s*$/) !== null) {
+        dataKosong.push(key.charAt(0).toUpperCase() + key.slice(1));
+      }
+    }
+
+    dataKosong.forEach((item, index, arr) => {
+      if (index !== 0) {
+        arr[index] = " " + item;
+      }
     });
-    window.location = "/kelola-data";
-    handleCloseEdit();
+
+    if (dataKosong.length === 0) {
+      if (datas === null) {
+        await BookService.addBooks(data);
+      } else {
+        await BookService.editBooks(datas.id, data);
+      }
+      window.location = "/kelola-data";
+      handleClose();
+    } else {
+      alert(dataKosong + " tidak dapat kosong");
+    }
+
+    try {
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const ModalBoxStyle = {
@@ -41,19 +68,11 @@ const EditModal = ({ openEdit, handleCloseEdit, datas }) => {
     borderRadius: 3,
   };
 
-  if (
-    datas && // 👈 null and undefined check
-    Object.keys(datas).length === 0 &&
-    Object.getPrototypeOf(datas) === Object.prototype
-  ) {
-    return null;
-  }
-
   return (
     <>
       <Modal
-        open={openEdit}
-        onClose={handleCloseEdit}
+        open={open}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -77,23 +96,23 @@ const EditModal = ({ openEdit, handleCloseEdit, datas }) => {
             variant="outlined"
             sx={{ mr: 2 }}
             required
-            onChange={(e) => setPengarang(e.target.value)}
             value={pengarang}
+            onChange={(e) => setPengarang(e.target.value)}
           />
           <TextField
             label="Penerbit"
             variant="outlined"
             sx={{ mr: 2 }}
             required
-            onChange={(e) => setPenerbit(e.target.value)}
             value={penerbit}
+            onChange={(e) => setPenerbit(e.target.value)}
           />
           <TextField
             label="Tahun"
             variant="outlined"
             required
-            onChange={(e) => setTahun(e.target.value.toString())}
             value={tahun}
+            onChange={(e) => setTahun(e.target.value.toString())}
           />
           <Button
             type="submit"
@@ -114,4 +133,4 @@ const EditModal = ({ openEdit, handleCloseEdit, datas }) => {
   );
 };
 
-export default EditModal;
+export default AddEditModal;

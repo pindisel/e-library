@@ -14,7 +14,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { InputModal, EditModal } from "../components";
+import { InputModal, EditModal, AddEditModal } from "../components";
 import { BookService } from "../services/BookService";
 
 const SubHeading = styled("div")({
@@ -37,14 +37,10 @@ const KelolaData = () => {
   };
 
   //Input Modal
-  const [openInput, setOpenInput] = useState(false);
-  const handleOpenInput = () => setOpenInput(true);
-  const handleCloseInput = () => setOpenInput(false);
-
-  //Edit Modal
-  const [openEdit, setOpenEdit] = useState(false);
-  const handleOpenEdit = () => setOpenEdit(true);
-  const handleCloseEdit = () => setOpenEdit(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [edit, setEdit] = useState(false);
   const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -96,14 +92,14 @@ const KelolaData = () => {
           mt: 5,
         }}
         style={{ borderRadius: 10 }}
-        onClick={handleOpenInput}
+        onClick={() => {
+          handleOpen();
+          setEdit(false);
+        }}
       >
         <Typography variant="subtitle1">Tambah Buku</Typography>
       </Button>
-      <InputModal
-        openInput={openInput}
-        handleCloseInput={() => handleCloseInput()}
-      />
+
       <TableContainer>
         <Table>
           <TableHead>
@@ -148,8 +144,9 @@ const KelolaData = () => {
                     <IconButton
                       color="green"
                       onClick={() => {
+                        setEdit(true);
                         setDataModal(data);
-                        handleOpenEdit();
+                        handleOpen();
                       }}
                     >
                       <FiEdit />
@@ -164,15 +161,11 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
-            {dataModal !== null ? (
-              <EditModal
-                openEdit={openEdit}
-                handleOpenEdit={() => handleOpenEdit()}
-                handleCloseEdit={() => handleCloseEdit()}
-                datas={dataModal}
-              />
-            ) : null}
-
+            <AddEditModal
+              open={open}
+              handleClose={() => handleClose()}
+              datas={dataModal}
+            />
             {emptyRows > 0 && (
               <TableRow
                 style={{
