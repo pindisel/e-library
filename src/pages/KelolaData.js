@@ -14,7 +14,7 @@ import {
 import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { InputModal } from "../components";
+import { InputModal, EditModal } from "../components";
 import { BookService } from "../services/BookService";
 
 const SubHeading = styled("div")({
@@ -36,12 +36,20 @@ const KelolaData = () => {
     }
   };
 
+  //Input Modal
+  const [openInput, setOpenInput] = useState(false);
+  const handleOpenInput = () => setOpenInput(true);
+  const handleCloseInput = () => setOpenInput(false);
+
+  //Edit Modal
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
+  const [dataModal, setDataModal] = useState(null);
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [books, setBooks] = useState([]);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const fetchBuku = async () => {
@@ -88,11 +96,14 @@ const KelolaData = () => {
           mt: 5,
         }}
         style={{ borderRadius: 10 }}
-        onClick={handleOpen}
+        onClick={handleOpenInput}
       >
         <Typography variant="subtitle1">Tambah Buku</Typography>
       </Button>
-      <InputModal open={open} handleClose={() => handleClose()}></InputModal>
+      <InputModal
+        openInput={openInput}
+        handleCloseInput={() => handleCloseInput()}
+      />
       <TableContainer>
         <Table>
           <TableHead>
@@ -132,9 +143,16 @@ const KelolaData = () => {
                   <TableCell align="center">{data.penerbit}</TableCell>
                   <TableCell align="center">{data.tahun}</TableCell>
                   <TableCell align="center">
-                    <IconButton color="green">
+                    <IconButton
+                      color="green"
+                      onClick={() => {
+                        setDataModal(data);
+                        handleOpenEdit();
+                      }}
+                    >
                       <FiEdit />
                     </IconButton>
+
                     <IconButton
                       onClick={() => deleteBook(data.id)}
                       color="error"
@@ -144,6 +162,15 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            {dataModal !== null ? (
+              <EditModal
+                openEdit={openEdit}
+                handleOpenEdit={() => handleOpenEdit()}
+                handleCloseEdit={() => handleCloseEdit()}
+                datas={dataModal}
+              />
+            ) : null}
+
             {emptyRows > 0 && (
               <TableRow
                 style={{

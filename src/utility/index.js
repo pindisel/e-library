@@ -2,15 +2,15 @@ import axios from "axios";
 
 const BASE_URL = "https://elibrary-back.herokuapp.com";
 
-async function http(method, headers, endpoint, body = null, data) {
-  // const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+async function http(method, endpoint, body = null, data) {
+  const headers = { "Content-Type": "application/json" };
   let response = null;
 
   if (method) {
     response = await axios({
-      headers: headers,
       url: `${BASE_URL}/${endpoint}`,
       method: method.toUpperCase(),
+      headers,
       params: body,
       data: data,
     });

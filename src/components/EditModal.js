@@ -1,23 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import { BookService } from "../services/BookService";
 
-const InputModal = ({ openInput, handleCloseInput }) => {
-  const [judul, setJudul] = useState("");
-  const [pengarang, setPengarang] = useState("");
-  const [penerbit, setPenerbit] = useState("");
-  const [tahun, setTahun] = useState("");
+const EditModal = ({ openEdit, handleCloseEdit, datas }) => {
+  // console.log(datas);
+  const [judul, setJudul] = useState();
+  const [pengarang, setPengarang] = useState();
+  const [penerbit, setPenerbit] = useState();
+  const [tahun, setTahun] = useState();
+
+  useEffect(() => {
+    console.log(datas.judul);
+    setJudul(datas.judul);
+    setPengarang(datas.pengarang);
+    setPenerbit(datas.penerbit);
+    setTahun(datas.tahun);
+  }, [datas.judul, datas.pengarang, datas.penerbit, datas.tahun]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await BookService.addBooks({
+    await BookService.editBooks(datas.id, {
       judul: judul,
       pengarang: pengarang,
       penerbit: penerbit,
       tahun: tahun,
     });
     window.location = "/kelola-data";
-    handleCloseInput();
+    handleCloseEdit();
   };
 
   const ModalBoxStyle = {
@@ -31,11 +40,20 @@ const InputModal = ({ openInput, handleCloseInput }) => {
     p: 4,
     borderRadius: 3,
   };
+
+  if (
+    datas && // 👈 null and undefined check
+    Object.keys(datas).length === 0 &&
+    Object.getPrototypeOf(datas) === Object.prototype
+  ) {
+    return null;
+  }
+
   return (
     <>
       <Modal
-        open={openInput}
-        onClose={handleCloseInput}
+        open={openEdit}
+        onClose={handleCloseEdit}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -51,6 +69,7 @@ const InputModal = ({ openInput, handleCloseInput }) => {
             variant="outlined"
             sx={{ mr: 2 }}
             required
+            value={judul}
             onChange={(e) => setJudul(e.target.value)}
           />
           <TextField
@@ -59,6 +78,7 @@ const InputModal = ({ openInput, handleCloseInput }) => {
             sx={{ mr: 2 }}
             required
             onChange={(e) => setPengarang(e.target.value)}
+            value={pengarang}
           />
           <TextField
             label="Penerbit"
@@ -66,12 +86,14 @@ const InputModal = ({ openInput, handleCloseInput }) => {
             sx={{ mr: 2 }}
             required
             onChange={(e) => setPenerbit(e.target.value)}
+            value={penerbit}
           />
           <TextField
             label="Tahun"
             variant="outlined"
             required
             onChange={(e) => setTahun(e.target.value.toString())}
+            value={tahun}
           />
           <Button
             type="submit"
@@ -92,4 +114,4 @@ const InputModal = ({ openInput, handleCloseInput }) => {
   );
 };
 
-export default InputModal;
+export default EditModal;
