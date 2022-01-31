@@ -12,7 +12,7 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { FiTrash2, FiEdit } from "react-icons/fi";
+import { FiTrash2, FiEdit, FiEdit2 } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { InputModal, EditModal } from "../components";
 import { BookService } from "../services/BookService";
