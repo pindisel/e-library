@@ -56,7 +56,10 @@ function Sidebar(props) {
           </ListSubheader>
         }
       >
-        <Link to="/" style={{ textDecoration: 'none',color:'inherit' }}>
+        <Link
+          to="/dashboard"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <ListItemButton>
             <ListItemIcon>
               <SpeedIcon />
@@ -73,7 +76,10 @@ function Sidebar(props) {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <Link to="/kelola-data" style={{ textDecoration: 'none',color:'inherit' }}>
+            <Link
+              to="/kelola-data/buku"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />
@@ -81,26 +87,41 @@ function Sidebar(props) {
                 <ListItemText primary="Data Buku" />
               </ListItemButton>
             </Link>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Data Anggota" />
-            </ListItemButton>
+            <Link
+              to="/kelola-data/anggota"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Data Anggota" />
+              </ListItemButton>
+            </Link>
           </List>
         </Collapse>{" "}
-        <ListItemButton>
-          <ListItemIcon>
-            <ChangeCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sirkulasi" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <MenuBookIcon />
-          </ListItemIcon>
-          <ListItemText primary="Log Data" />
-        </ListItemButton>
+        <Link
+          to="/sirkulasi"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <ChangeCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sirkulasi" />
+          </ListItemButton>
+        </Link>
+        <Link
+          to="/log-data"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <MenuBookIcon />
+            </ListItemIcon>
+            <ListItemText primary="Log Data" />
+          </ListItemButton>
+        </Link>
         <ListItemButton>
           <ListItemIcon>
             <PrintIcon />
@@ -149,7 +170,7 @@ function Sidebar(props) {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar color="white">
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -159,9 +180,9 @@ function Sidebar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          {/* <Typography variant="h6" noWrap component="div">
             Nama
-          </Typography>
+          </Typography> */}
         </Toolbar>
       </AppBar>
       <Box
