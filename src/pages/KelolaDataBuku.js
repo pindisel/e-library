@@ -70,7 +70,7 @@ const KelolaData = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h2" fontWeight={600} gutterBottom>
+      <Typography variant="h4" fontWeight={600} gutterBottom>
         Master Data
       </Typography>
       <SubHeading

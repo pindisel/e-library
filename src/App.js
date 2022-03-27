@@ -27,6 +27,10 @@ const theme = createTheme({
       main: "#007C4B",
       contrastText: "#fff",
     },
+    darkBlue: {
+      main: "#001730",
+      contrastText: "#fff",
+    },
   },
 });
 
@@ -35,29 +39,25 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          <Layout>
-            <Routes>
-              <Route exact path="/dashboard" element={<Dashboard />} />
-              <Route exact path="/log-data" element={<LogData />} />
-              <Route exact path="/sirkulasi" element={<Sirkulasi />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route
-                exact
-                path="/"
-                element={<Navigate to="/login" replace />}
-              />
-              <Route
-                exact
-                path="/kelola-data/buku"
-                element={<KelolaDataBuku />}
-              />
-              <Route
-                exact
-                path="/kelola-data/anggota"
-                element={<KelolaDataAnggota />}
-              />
-            </Routes>
-          </Layout>
+          {/* <Layout> */}
+          <Routes>
+            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/log-data" element={<LogData />} />
+            <Route exact path="/sirkulasi" element={<Sirkulasi />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/" element={<Navigate to="/login" replace />} />
+            <Route
+              exact
+              path="/kelola-data/buku"
+              element={<KelolaDataBuku />}
+            />
+            <Route
+              exact
+              path="/kelola-data/anggota"
+              element={<KelolaDataAnggota />}
+            />
+          </Routes>
+          {/* </Layout> */}
         </Router>
       </ThemeProvider>
     </>
