@@ -44,7 +44,7 @@ function Sidebar(props) {
 
   const drawer = (
     <div>
-      <Toolbar>E-Library</Toolbar>
+      <Toolbar>E-Document</Toolbar>
       <Divider />
       <List
         sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -84,7 +84,7 @@ function Sidebar(props) {
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="Data Buku" />
+                <ListItemText primary="Data Dokumen" />
               </ListItemButton>
             </Link>
             <Link
