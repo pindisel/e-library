@@ -77,7 +77,7 @@ function Sidebar(props) {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Link
-              to="/kelola-data/buku"
+              to="/kelola-data/dokumen"
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ pl: 4 }}>

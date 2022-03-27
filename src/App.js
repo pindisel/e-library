@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import {
   Dashboard,
-  KelolaDataBuku,
+  KelolaDataDokumen,
   KelolaDataAnggota,
   Login,
   LogData,
@@ -39,25 +39,29 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <Layout> */}
-          <Routes>
-            <Route exact path="/dashboard" element={<Dashboard />} />
-            <Route exact path="/log-data" element={<LogData />} />
-            <Route exact path="/sirkulasi" element={<Sirkulasi />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/" element={<Navigate to="/login" replace />} />
-            <Route
-              exact
-              path="/kelola-data/buku"
-              element={<KelolaDataBuku />}
-            />
-            <Route
-              exact
-              path="/kelola-data/anggota"
-              element={<KelolaDataAnggota />}
-            />
-          </Routes>
-          {/* </Layout> */}
+          <Layout>
+            <Routes>
+              <Route exact path="/dashboard" element={<Dashboard />} />
+              <Route exact path="/log-data" element={<LogData />} />
+              <Route exact path="/sirkulasi" element={<Sirkulasi />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route
+                exact
+                path="/"
+                element={<Navigate to="/login" replace />}
+              />
+              <Route
+                exact
+                path="/kelola-data/dokumen"
+                element={<KelolaDataDokumen />}
+              />
+              <Route
+                exact
+                path="/kelola-data/anggota"
+                element={<KelolaDataAnggota />}
+              />
+            </Routes>
+          </Layout>
         </Router>
       </ThemeProvider>
     </>
