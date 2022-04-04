@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { BookService } from "../services/BookService";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const KonfirmasiUser = () => {
   const { id } = useParams();
@@ -19,7 +19,7 @@ const KonfirmasiUser = () => {
 
   return (
     <Box>
-      <Typography>sadasdasd{books[0].judul}</Typography>
+     <Typography>sadas</Typography>
     </Box>
   );
 };

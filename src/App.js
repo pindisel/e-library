@@ -65,7 +65,7 @@ function App() {
                 />
                  <Route
                   exact
-                  path="/konfirmasi-peminjaman/dokumen-:id"
+                  path="/konfirmasi-peminjaman/:id"
                   element={<KonfirmasiUser/>}
                 />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
