@@ -26,6 +26,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PrintIcon from "@mui/icons-material/Print";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { Link } from "react-router-dom";
+import { makeStyles } from '@mui/styles';
 
 const drawerWidth = 240;
 
@@ -42,12 +43,24 @@ function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
+  const useStyles = makeStyles({
+    list: {
+      width: 250
+    },
+    fullList: {
+      width: "auto"
+    },
+    paper: {
+      background: "#001730"
+    }
+  });
+
+  const drawer = useStyles(
     <div>
       <Toolbar>E-Document</Toolbar>
       <Divider />
       <List
-        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        sx={{ width: "100%", maxWidth: 360, bgcolor: "green" }}
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={

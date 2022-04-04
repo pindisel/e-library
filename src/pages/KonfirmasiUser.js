@@ -19,7 +19,7 @@ const KonfirmasiUser = () => {
 
   return (
     <Box>
-      <Typography>sadas</Typography>
+      <Typography>{books.judul}</Typography>
     </Box>
   );
 };
