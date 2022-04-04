@@ -2,13 +2,6 @@ import React from "react";
 import { Typography, Grid, Container, styled, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const SubHeading = styled("div")({
-  backgroundColor: "#6F8197",
-  width: "fit-content",
-  color: "white",
-  borderRadius: "5px",
-});
-
 const Item = styled(Paper)({
   textAlign: "center",
   height: 250,
@@ -26,16 +19,17 @@ const Dashboard = ({ loggedIn }) => {
           <Typography variant="h4" fontWeight={600} gutterBottom>
             Dashboard
           </Typography>
-          <SubHeading
-            sx={{
-              pl: 2,
-              pr: 2,
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            gutterBottom
+            style={{
+              color: "#6F8197",
             }}
           >
-            <Typography variant="subtitle2" fontWeight={600} gutterBottom>
-              Administrator
-            </Typography>
-          </SubHeading>
+            Administrator
+          </Typography>
+
           <Grid
             container
             rowSpacing={1}
