@@ -18,8 +18,15 @@ async function editBooks(id, data) {
   return response;
 }
 
+async function getBooksById(id) {
+  const body = {};
+  const response = await gatewayHelper.http("GET", `buku/${id}`, body);
+  return response;
+}
+
 export const BookService = {
   getBooks,
   addBooks,
   editBooks,
+  getBooksById,
 };

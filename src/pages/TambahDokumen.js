@@ -35,6 +35,8 @@ const TambahDokumen = () => {
 
     if (dataKosong.length === 0) {
       await BookService.addBooks(data);
+      alert(dataKosong + "dokumen berhasil ditambahkan");
+      window.location = "/tambah-dokumen";
     } else {
       alert(dataKosong + " tidak dapat kosong");
     }
@@ -48,10 +50,14 @@ const TambahDokumen = () => {
   return (
     <>
       <Box
+        component="form"
         sx={{
           ml: 10,
           pt: 10,
         }}
+        noValidate
+        autoComplete="off"
+        onSubmit={onSubmit}
       >
         <Typography variant="h4">Tambah Dokumen</Typography>
         <Typography
@@ -143,7 +149,7 @@ const TambahDokumen = () => {
             <Button variant="contained" color="error">
               Cancel
             </Button>
-            <Button variant="contained" color="success">
+            <Button type="submit" variant="contained" color="success">
               Add
             </Button>
           </Stack>

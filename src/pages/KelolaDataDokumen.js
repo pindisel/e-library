@@ -17,6 +17,7 @@ import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { BookService } from "../services/BookService";
+import { Link } from 'react-router-dom';
 
 const SubHeading = styled("div")({
   backgroundColor: "#6F8197",
@@ -125,6 +126,9 @@ const KelolaData = () => {
                 <TableCell align="center" width={150}>
                   Kelola
                 </TableCell>
+                <TableCell align="center" width={150}>
+                  pinjam?
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -157,6 +161,14 @@ const KelolaData = () => {
                       >
                         <FiTrash2 />
                       </IconButton>
+                    </TableCell>
+
+                    <TableCell align="center">
+    
+                      <Button component={Link} to={`/konfirmasi-peminjaman/dokumen-${data.id}`} variant="contained"
+                        >
+                        pinjam
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

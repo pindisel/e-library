@@ -11,10 +11,10 @@ import {
   KelolaDataDokumen,
   KelolaDataAnggota,
   Login,
-  LogData,
   Sirkulasi,
   Signup,
   TambahDokumen,
+  KonfirmasiUser,
 } from "./pages";
 import { Layout } from "./components";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -62,6 +62,11 @@ function App() {
                   exact
                   path="/tambah-dokumen"
                   element={<TambahDokumen />}
+                />
+                 <Route
+                  exact
+                  path="/konfirmasi-peminjaman/dokumen-:id"
+                  element={<KonfirmasiUser/>}
                 />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
                 <Route
