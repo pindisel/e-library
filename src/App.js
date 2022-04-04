@@ -45,28 +45,28 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          <Routes>
-            <Route
-              exact
-              path="/login"
-              element={<Login setloggedIn={setloggedIn} />}
-            />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/" element={<Navigate to="/login" replace />} />
-          </Routes>
           {loggedIn ? (
             <Layout>
               <Routes>
-                <Route exact path="/dashboard" element={<Dashboard loggedIn={loggedIn}/>} />
+                <Route
+                  exact
+                  path="/dashboard"
+                  element={<Dashboard loggedIn={loggedIn} />}
+                />
+                <Route
+                  exact
+                  path="/"
+                  element={<Navigate to="/dashboard" replace />}
+                />
                 <Route
                   exact
                   path="/tambah-dokumen"
                   element={<TambahDokumen />}
                 />
-                 <Route
+                <Route
                   exact
                   path="/konfirmasi-peminjaman/dokumen-:id"
-                  element={<KonfirmasiUser/>}
+                  element={<KonfirmasiUser />}
                 />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
                 <Route
@@ -79,14 +79,28 @@ function App() {
                   path="/kelola-data/anggota"
                   element={<KelolaDataAnggota />}
                 />
-                  <Route
+                <Route
                   exact
                   path="/kelola-data/peminjaman"
                   element={<KelolaDataPeminjaman />}
                 />
               </Routes>
             </Layout>
-          ) : null}
+          ) : (
+            <Routes>
+              <Route
+                exact
+                path="/login"
+                element={<Login setloggedIn={setloggedIn} />}
+              />
+              <Route exact path="/signup" element={<Signup />} />
+              <Route
+                exact
+                path="/*"
+                element={<Navigate to="/login" replace />}
+              />
+            </Routes>
+          )}
         </Router>
       </ThemeProvider>
     </>
