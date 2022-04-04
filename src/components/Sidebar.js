@@ -98,6 +98,17 @@ function Sidebar(props) {
                 <ListItemText primary="Data Anggota" />
               </ListItemButton>
             </Link>
+            <Link
+              to="/kelola-data/anggota"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Data Peminjaman" />
+              </ListItemButton>
+            </Link>
           </List>
         </Collapse>{" "}
         <Link
@@ -112,47 +123,16 @@ function Sidebar(props) {
           </ListItemButton>
         </Link>
         <Link
-          to="/log-data"
+          to="/tambah-dokumen"
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <ListItemButton>
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
-            <ListItemText primary="Log Data" />
+            <ListItemText primary="Tambah Dokumen" />
           </ListItemButton>
         </Link>
-        <ListItemButton>
-          <ListItemIcon>
-            <PrintIcon />
-          </ListItemIcon>
-          <ListItemText primary="Laporan" />
-        </ListItemButton>
-      </List>
-
-      <Divider />
-      <List
-        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Setting
-          </ListSubheader>
-        }
-      >
-        <ListItemButton>
-          <ListItemIcon>
-            <AccountBoxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pengguna Sistem" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItemButton>
       </List>
     </div>
   );

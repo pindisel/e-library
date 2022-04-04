@@ -14,6 +14,7 @@ import {
   LogData,
   Sirkulasi,
   Signup,
+  TambahDokumen,
 } from "./pages";
 import { Layout } from "./components";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -38,7 +39,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(false);
+  const [loggedIn, setloggedIn] = useState(true);
 
   return (
     <>
@@ -57,7 +58,11 @@ function App() {
             <Layout>
               <Routes>
                 <Route exact path="/dashboard" element={<Dashboard />} />
-                <Route exact path="/log-data" element={<LogData />} />
+                <Route
+                  exact
+                  path="/tambah-dokumen"
+                  element={<TambahDokumen />}
+                />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
                 <Route
                   exact
