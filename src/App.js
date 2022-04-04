@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-  useLocation,
 } from "react-router-dom";
 import {
   Dashboard,
@@ -15,6 +14,7 @@ import {
   Signup,
   TambahDokumen,
   KonfirmasiUser,
+  KelolaDataPeminjaman,
 } from "./pages";
 import { Layout } from "./components";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -57,7 +57,7 @@ function App() {
           {loggedIn ? (
             <Layout>
               <Routes>
-                <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/dashboard" element={<Dashboard loggedIn={loggedIn}/>} />
                 <Route
                   exact
                   path="/tambah-dokumen"
@@ -78,6 +78,11 @@ function App() {
                   exact
                   path="/kelola-data/anggota"
                   element={<KelolaDataAnggota />}
+                />
+                  <Route
+                  exact
+                  path="/kelola-data/peminjaman"
+                  element={<KelolaDataPeminjaman />}
                 />
               </Routes>
             </Layout>

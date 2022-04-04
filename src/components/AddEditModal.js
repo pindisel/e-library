@@ -37,14 +37,14 @@ const AddEditModal = ({ open, handleClose, datas }) => {
         arr[index] = " " + item;
       }
     });
-
+    console.log(dataKosong);
     if (dataKosong.length === 0) {
       if (datas === null) {
         await BookService.addBooks(data);
       } else {
         await BookService.editBooks(datas.id, data);
       }
-      window.location = "/kelola-data";
+      window.location = "/kelola-data/dokumen";
       handleClose();
     } else {
       alert(dataKosong + " tidak dapat kosong");

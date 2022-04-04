@@ -99,7 +99,7 @@ function Sidebar(props) {
               </ListItemButton>
             </Link>
             <Link
-              to="/kelola-data/anggota"
+              to="/kelola-data/peminjaman"
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ pl: 4 }}>

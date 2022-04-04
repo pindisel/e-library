@@ -7,3 +7,4 @@ export { default as Sirkulasi } from "./Sirkulasi";
 export { default as TambahDokumen } from "./TambahDokumen";
 export { default as KonfrimasiSuper } from "./KonfirmasiSuper";
 export { default as KonfirmasiUser } from "./KonfirmasiUser";
+export { default as KelolaDataPeminjaman } from "./KelolaDataPeminjaman";

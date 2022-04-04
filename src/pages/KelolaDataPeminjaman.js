@@ -24,9 +24,7 @@ const SubHeading = styled("div")({
   borderRadius: "5px",
 });
 
-const Sirkulasi = () => {
-  
-
+const KelolaData = () => {
   const deleteBook = async (id) => {
     try {
       await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
@@ -73,7 +71,7 @@ const Sirkulasi = () => {
   return (
     <>
       <Typography variant="h4" component="h2" fontWeight={600} gutterBottom>
-        Sirkulasi
+        Master Data
       </Typography>
       <SubHeading
         sx={{
@@ -82,7 +80,7 @@ const Sirkulasi = () => {
         }}
       >
         <Typography variant="subtitle2" fontWeight={600} gutterBottom>
-          Sirkulasi Peminjaman
+          Data Peminjaman
         </Typography>
       </SubHeading>
       <Button
@@ -186,9 +184,8 @@ const Sirkulasi = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
         rowsPerPageOptions={[5, 10, 20, 25]}
       />
-
     </>
   );
 };
 
-export default Sirkulasi;
+export default KelolaData;
