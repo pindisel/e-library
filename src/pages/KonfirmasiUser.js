@@ -11,15 +11,15 @@ const KonfirmasiUser = () => {
     const fetchBuku = async () => {
       const response = await BookService.getBooksById(id);
       const data = response.data;
-      setBooks(data);
-      console.log(data);
+      setBooks(data[0]);
+      console.log(books);
     };
     fetchBuku();
   }, []);
 
   return (
     <Box>
-     <Typography>sadas</Typography>
+      <Typography>sadas</Typography>
     </Box>
   );
 };

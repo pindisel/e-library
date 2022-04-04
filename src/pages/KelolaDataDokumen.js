@@ -163,7 +163,7 @@ const KelolaData = () => {
 
                     <TableCell align="center">
     
-                      <Button component={Link} to={`/konfirmasi-peminjaman/${data.id}`} variant="contained"
+                      <Button component={Link} to={`/konfirmasi-peminjaman/dokumen-${data.id}`} variant="contained"
                         >
                         pinjam
                       </Button>
