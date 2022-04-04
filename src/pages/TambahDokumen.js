@@ -5,8 +5,10 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { BookService } from "../services/BookService";
+import { useNavigate } from "react-router-dom";
 
 const TambahDokumen = () => {
+  const navigate = useNavigate();
   const [judul, setJudul] = useState("");
   const [pengarang, setPengarang] = useState("");
   const [penerbit, setPenerbit] = useState("");
@@ -36,7 +38,7 @@ const TambahDokumen = () => {
     if (dataKosong.length === 0) {
       await BookService.addBooks(data);
       alert(dataKosong + "dokumen berhasil ditambahkan");
-      window.location = "/tambah-dokumen";
+      navigate("/kelola-data/dokumen");
     } else {
       alert(dataKosong + " tidak dapat kosong");
     }
