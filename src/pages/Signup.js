@@ -8,8 +8,9 @@ import {
   Container,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { RegisterService } from "../services/RegisterService";
 
-const Login = ({ setloggedIn }) => {
+const Signup = () => {
   const navigate = useNavigate();
   function handleSubmit() {
     if (
@@ -22,11 +23,12 @@ const Login = ({ setloggedIn }) => {
       alert("Please fill all the details!");
     } else {
       navigate("/dashboard");
-      setloggedIn(true);
     }
   }
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [nama, setNama] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  console.log(nama);
   console.log(email);
   console.log(password);
 
@@ -51,6 +53,18 @@ const Login = ({ setloggedIn }) => {
               E-Document
             </Typography>
             <Typography variant="h4" fontWeight={600} gutterBottom>
+              Nama
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              color="darkBlue"
+              size="small"
+              fullWidth
+              focused
+              onChange={(e) => setNama(e.target.value)}
+            />
+            <Typography variant="h4" fontWeight={600} gutterBottom>
               Email
             </Typography>
             <TextField
@@ -58,6 +72,20 @@ const Login = ({ setloggedIn }) => {
               variant="outlined"
               color="darkBlue"
               size="small"
+              error={
+                email.length >= 1 &&
+                !email.match(
+                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                )
+              }
+              helperText={
+                email.length >= 1 &&
+                !email.match(
+                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                )
+                  ? "Format email tidak sesuai"
+                  : ""
+              }
               fullWidth
               focused
               onChange={(e) => setEmail(e.target.value)}
@@ -73,6 +101,12 @@ const Login = ({ setloggedIn }) => {
               type="password"
               fullWidth
               focused
+              error={password.length < 8 && password.length >= 1}
+              helperText={
+                password.length < 8 && password.length >= 1
+                  ? "Min. 8 karakter"
+                  : ""
+              }
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
@@ -86,7 +120,7 @@ const Login = ({ setloggedIn }) => {
               fullWidth
               onClick={handleSubmit}
             >
-              <Typography variant="h6">Login</Typography>
+              <Typography variant="h6">Sign Up</Typography>
             </Button>
           </form>
           <Box
@@ -94,7 +128,7 @@ const Login = ({ setloggedIn }) => {
               mt: 3,
             }}
           >
-            <Typography variant="h6">Belum memiliki akun?</Typography>
+            <Typography variant="h6">Sudah memiliki akun?</Typography>
             <Button
               variant="contained"
               color="darkBlue"
@@ -102,10 +136,10 @@ const Login = ({ setloggedIn }) => {
               style={{ borderRadius: 10 }}
               fullWidth
               onClick={() => {
-                navigate("/signup");
+                navigate("/login");
               }}
             >
-              <Typography variant="h6">Sign Up</Typography>
+              <Typography variant="h6">Log In</Typography>
             </Button>
           </Box>
         </Grid>
@@ -117,4 +151,4 @@ const Login = ({ setloggedIn }) => {
   );
 };
 
-export default Login;
+export default Signup;
