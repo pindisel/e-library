@@ -6,16 +6,16 @@ import { useHistory, useParams } from "react-router-dom";
 const KonfirmasiUser = () => {
   const { id } = useParams();
   const [books, setBooks] = useState([]);
-  console.log(id);
+  // console.log(id);
   useEffect(() => {
     const fetchBuku = async () => {
       const response = await BookService.getBooksById(id);
       const data = response.data;
       setBooks(data[0]);
-      console.log(books);
+      // console.log(books);
     };
     fetchBuku();
-  }, []);
+  }, [id]);
 
   return (
     <Box>

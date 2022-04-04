@@ -11,18 +11,10 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { UserService } from "../services/UserService";
-
-const SubHeading = styled("div")({
-  backgroundColor: "#6F8197",
-  width: "fit-content",
-  color: "white",
-  borderRadius: "5px",
-});
 
 const KelolaData = () => {
   const deleteBook = async (id) => {
@@ -70,19 +62,19 @@ const KelolaData = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h2" fontWeight={600} gutterBottom>
+      <Typography variant="h4" fontWeight={600} gutterBottom>
         Master Data
       </Typography>
-      <SubHeading
-        sx={{
-          pl: 2,
-          pr: 2,
+      <Typography
+        variant="h6"
+        fontWeight={600}
+        gutterBottom
+        style={{
+          color: "#6F8197",
         }}
       >
-        <Typography variant="subtitle2" fontWeight={600} gutterBottom>
-          Data Anggota
-        </Typography>
-      </SubHeading>
+        Data Anggota
+      </Typography>
       <Button
         variant="contained"
         color="green"

@@ -59,13 +59,20 @@ const TambahDokumen = () => {
         autoComplete="off"
         onSubmit={onSubmit}
       >
-        <Typography variant="h4">Tambah Dokumen</Typography>
+        <Typography variant="h4" fontWeight={600}>
+          Tambah Dokumen
+        </Typography>
         <Typography
+          variant="h6"
+          fontWeight={600}
           sx={{
             width: 500,
             maxWidth: "100%",
             mt: 1,
             mb: 5,
+          }}
+          style={{
+            color: "#6F8197",
           }}
         >
           Tambah anggota

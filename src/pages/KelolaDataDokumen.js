@@ -11,19 +11,11 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { BookService } from "../services/BookService";
-import { Link } from 'react-router-dom';
-
-const SubHeading = styled("div")({
-  backgroundColor: "#6F8197",
-  width: "fit-content",
-  color: "white",
-  borderRadius: "5px",
-});
+import { Link } from "react-router-dom";
 
 const KelolaData = () => {
   const deleteBook = async (id) => {
@@ -74,16 +66,16 @@ const KelolaData = () => {
       <Typography variant="h4" fontWeight={600} gutterBottom>
         Master Data
       </Typography>
-      <SubHeading
-        sx={{
-          pl: 2,
-          pr: 2,
+      <Typography
+        variant="h6"
+        fontWeight={600}
+        gutterBottom
+        style={{
+          color: "#6F8197",
         }}
       >
-        <Typography variant="subtitle2" fontWeight={600} gutterBottom>
-          Data Dokumen
-        </Typography>
-      </SubHeading>
+        Data Dokumen
+      </Typography>
       <Button
         variant="contained"
         color="green"
@@ -118,72 +110,74 @@ const KelolaData = () => {
               {/* <TableCell align="center" width={200}>
                 Penerbit
               </TableCell> */}
-                <TableCell align="center" width={50}>
-                  Tahun
-                </TableCell>
-                <TableCell align="center" width={150}>
-                  Kelola
-                </TableCell>
-                <TableCell align="center" width={150}>
-                  pinjam?
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {books
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((data, index) => (
-                  <TableRow key={data.id}>
-                    <TableCell align="center">
-                      {page * rowsPerPage + (index + 1)}
-                    </TableCell>
-                    <TableCell align="center">{data.idbuku}</TableCell>
-                    <TableCell align="center">{data.judul}</TableCell>
-                    <TableCell align="center">{data.pengarang}</TableCell>
-                    {/* <TableCell align="center">{data.penerbit}</TableCell> */}
-                    <TableCell align="center">{data.tahun}</TableCell>
-                    <TableCell align="center">
-                      <IconButton
-                        color="green"
-                        onClick={() => {
-                          setDataModal(data);
-                          handleOpen();
-                        }}
-                      >
-                        <FiEdit />
-                      </IconButton>
+              <TableCell align="center" width={50}>
+                Tahun
+              </TableCell>
+              <TableCell align="center" width={150}>
+                Kelola
+              </TableCell>
+              <TableCell align="center" width={150}>
+                pinjam?
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {books
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((data, index) => (
+                <TableRow key={data.id}>
+                  <TableCell align="center">
+                    {page * rowsPerPage + (index + 1)}
+                  </TableCell>
+                  <TableCell align="center">{data.idbuku}</TableCell>
+                  <TableCell align="center">{data.judul}</TableCell>
+                  <TableCell align="center">{data.pengarang}</TableCell>
+                  {/* <TableCell align="center">{data.penerbit}</TableCell> */}
+                  <TableCell align="center">{data.tahun}</TableCell>
+                  <TableCell align="center">
+                    <IconButton
+                      color="green"
+                      onClick={() => {
+                        setDataModal(data);
+                        handleOpen();
+                      }}
+                    >
+                      <FiEdit />
+                    </IconButton>
 
-                      <IconButton
-                        onClick={() => deleteBook(data.id)}
-                        color="error"
-                      >
-                        <FiTrash2 />
-                      </IconButton>
-                    </TableCell>
+                    <IconButton
+                      onClick={() => deleteBook(data.id)}
+                      color="error"
+                    >
+                      <FiTrash2 />
+                    </IconButton>
+                  </TableCell>
 
-                    <TableCell align="center">
-    
-                      <Button component={Link} to={`/konfirmasi-peminjaman/dokumen-${data.id}`} variant="contained"
-                        >
-                        pinjam
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              <AddEditModal
-                open={open}
-                handleClose={() => handleClose()}
-                datas={dataModal}
-              />
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 73 * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={7} />
+                  <TableCell align="center">
+                    <Button
+                      component={Link}
+                      to={`/konfirmasi-peminjaman/dokumen-${data.id}`}
+                      variant="contained"
+                    >
+                      pinjam
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              )}
+              ))}
+            <AddEditModal
+              open={open}
+              handleClose={() => handleClose()}
+              datas={dataModal}
+            />
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: 73 * emptyRows,
+                }}
+              >
+                <TableCell colSpan={7} />
+              </TableRow>
+            )}
             <AddEditModal
               open={open}
               handleClose={() => handleClose()}
