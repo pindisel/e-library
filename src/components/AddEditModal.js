@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
 import { BookService } from "../services/BookService";
+import { useNavigate } from "react-router-dom";
 
 const AddEditModal = ({ open, handleClose, datas }) => {
+  const navigate = useNavigate();
   const [judul, setJudul] = useState("");
   const [pengarang, setPengarang] = useState("");
   const [penerbit, setPenerbit] = useState("");
@@ -44,7 +46,7 @@ const AddEditModal = ({ open, handleClose, datas }) => {
       } else {
         await BookService.editBooks(datas.id, data);
       }
-      window.location = "/kelola-data/dokumen";
+      navigate("/kelola-data/dokumen");
       handleClose();
     } else {
       alert(dataKosong + " tidak dapat kosong");

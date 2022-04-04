@@ -15,15 +15,16 @@ import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { BookService } from "../services/BookService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
+  const navigate = useNavigate();
   const deleteBook = async (id) => {
     try {
       await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
         method: "DELETE",
       });
-      window.location = "/kelola-data";
+      navigate("/kelola-data/dokumen");
     } catch (err) {
       console.error(err.message);
     }
