@@ -55,7 +55,11 @@ function App() {
           {loggedIn ? (
             <Layout>
               <Routes>
-                <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route
+                  exact
+                  path="/dashboard"
+                  element={<Dashboard loggedIn={loggedIn} />}
+                />
                 <Route exact path="/log-data" element={<LogData />} />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
                 <Route

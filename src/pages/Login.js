@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  TextField,
-  Typography,
-  Box,
-  Grid,
-  Container,
-} from "@mui/material";
+import { Button, TextField, Typography, Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ setloggedIn }) => {
@@ -28,6 +21,8 @@ const Login = ({ setloggedIn }) => {
   }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  console.log(email);
+  console.log(password);
 
   return (
     <>
