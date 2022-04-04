@@ -15,7 +15,7 @@ import { styled } from "@mui/material/styles";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
-import { MemberService } from "../services/MemberService";
+import { UserService } from "../services/UserService";
 
 const SubHeading = styled("div")({
   backgroundColor: "#6F8197",
@@ -48,7 +48,7 @@ const KelolaData = () => {
 
   useEffect(() => {
     const fetchBuku = async () => {
-      const response = await MemberService.getBooks();
+      const response = await UserService.getBooks();
       const data = response.data;
       setBooks(data);
     };

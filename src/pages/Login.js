@@ -11,13 +11,14 @@ import { useNavigate } from "react-router-dom";
 
 const Login = ({ setloggedIn }) => {
   const navigate = useNavigate();
-  function handleSubmit() {
+  function onSubmit() {
     if (
-      email === null ||
-      !email.trim() ||
-      !email.match(
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
+      false
+      // email === null ||
+      // !email.trim() ||
+      // !email.match(
+      //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      // )
     ) {
       alert("Please fill all the details!");
     } else {
@@ -25,10 +26,8 @@ const Login = ({ setloggedIn }) => {
       setloggedIn(true);
     }
   }
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  console.log(email);
-  console.log(password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -50,7 +49,7 @@ const Login = ({ setloggedIn }) => {
             >
               E-Document
             </Typography>
-            <Typography variant="h4" fontWeight={600} gutterBottom>
+            <Typography variant="h5" fontWeight={600} gutterBottom>
               Email
             </Typography>
             <TextField
@@ -62,7 +61,7 @@ const Login = ({ setloggedIn }) => {
               focused
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Typography variant="h4" fontWeight={600} gutterBottom>
+            <Typography variant="h5" fontWeight={600} gutterBottom>
               Password
             </Typography>
             <TextField
@@ -84,7 +83,7 @@ const Login = ({ setloggedIn }) => {
               }}
               style={{ borderRadius: 10 }}
               fullWidth
-              onClick={handleSubmit}
+              onClick={onSubmit}
             >
               <Typography variant="h6">Login</Typography>
             </Button>
