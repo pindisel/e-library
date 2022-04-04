@@ -32,6 +32,21 @@ const levels = [
   },
 ];
 
+const units = [
+  {
+    value: "IT",
+    label: "IT",
+  },
+  {
+    value: "administrasi",
+    label: "administrasi",
+  },
+  {
+    value: "HRD",
+    label: "HRD",
+  },
+];
+
 const Signup = () => {
   const navigate = useNavigate();
   const [nama, setNama] = useState("");
@@ -40,7 +55,6 @@ const Signup = () => {
   const [level, setLevel] = useState("");
   const [jenisKelamin, setJenisKelamin] = useState("");
   const [noKtp, setNoKtp] = useState("");
-
   const [unitKerja, setUnitKerja] = useState("");
 
   const onSubmit = async (e) => {
@@ -49,17 +63,19 @@ const Signup = () => {
       nama: nama,
       email: email,
       password: password,
-      level: level,
-      jenis_kelamin: jenisKelamin,
       nomor_ktp: noKtp,
       unit_kerja: unitKerja,
+      level: level,
+      jenis_kelamin: jenisKelamin,
     };
-    console.log(data);
 
     var dataKosong = [];
     for (const key in data) {
       if (data[key] === null || data[key].match(/^\s*$/)) {
-        dataKosong.push(key.charAt(0).toUpperCase() + key.slice(1));
+        console.log(key);
+        dataKosong.push(
+          key.charAt(0).toUpperCase() + key.slice(1).replaceAll("_", " ")
+        );
       }
     }
 
@@ -81,7 +97,7 @@ const Signup = () => {
       dataSalah.push("Password");
     }
     if (!data.nomor_ktp.match(/^\d{16}$/)) {
-      dataSalah.push("No. KTP");
+      dataSalah.push("Nomor KTP");
     }
     dataSalah.forEach((item, index, arr) => {
       if (index !== 0) {
@@ -200,21 +216,22 @@ const Signup = () => {
             <Typography variant="h5" fontWeight={600} gutterBottom>
               Unit Kerja
             </Typography>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              color="darkBlue"
-              size="small"
+            <Select
               fullWidth
-              focused
+              size="small"
               onChange={(e) => setUnitKerja(e.target.value)}
-            />
+            >
+              {units.map((option) => (
+                <MenuItem value={option.value}>
+                  <Typography variant="subtitle1">{option.label}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
             <Typography variant="h5" fontWeight={600} gutterBottom>
               Level
             </Typography>
             <Select
               fullWidth
-              value={level}
               size="small"
               onChange={(e) => setLevel(e.target.value)}
             >
