@@ -21,15 +21,37 @@ import FolderIcon from "@mui/icons-material/Folder";
 import SpeedIcon from "@mui/icons-material/Speed";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { styled } from "@mui/material";
 import { Link } from "react-router-dom";
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
+import { useTheme } from '@mui/material/styles';
+
 
 const drawerWidth = 240;
 
+const useStyles = makeStyles(() => {
+  return ({
+  drawerPaper: {
+    width: (theme) => theme.drawerWidth,
+    backgroundColor: "rgba(0, 23, 48, 1)",
+    color:"white",
+  },
+
+})});
+
+
+const ListItemIconWhite = styled(ListItemIcon)({
+  color: 'white',
+});
+
+
 function Sidebar(props) {
-  const { window } = props;
+  const { window } = props;  
+  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [open, setOpen] = React.useState(true);
+  const classes = useStyles(theme);
+
 
   const handleClick = () => {
     setOpen(!open);
@@ -39,19 +61,7 @@ function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const useStyles = makeStyles({
-    list: {
-      width: 250
-    },
-    fullList: {
-      width: "auto"
-    },
-    paper: {
-      background: "#001730"
-    }
-  });
-
-  const drawer = useStyles(
+  const drawer =(
     <div>
       <Toolbar>E-Document</Toolbar>
       <Divider />
@@ -60,7 +70,7 @@ function Sidebar(props) {
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
+          <ListSubheader style={{ backgroundColor: "#001730", color:"white" }} component="div" id="nested-list-subheader">
             Main Navigation
           </ListSubheader>
         }
@@ -70,16 +80,16 @@ function Sidebar(props) {
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <ListItemButton>
-            <ListItemIcon>
+            <ListItemIconWhite>
               <SpeedIcon />
-            </ListItemIcon>
+            </ListItemIconWhite>
             <ListItemText primary="Dashboard" />
           </ListItemButton>
         </Link>
         <ListItemButton onClick={handleClick}>
-          <ListItemIcon>
+          <ListItemIconWhite>
             <FolderIcon />
-          </ListItemIcon>
+          </ListItemIconWhite>
           <ListItemText primary="Kelola data" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
@@ -90,9 +100,9 @@ function Sidebar(props) {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
+                <ListItemIconWhite>
                   <StarBorder />
-                </ListItemIcon>
+                </ListItemIconWhite>
                 <ListItemText primary="Data Dokumen" />
               </ListItemButton>
             </Link>
@@ -101,9 +111,9 @@ function Sidebar(props) {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
+                <ListItemIconWhite>
                   <StarBorder />
-                </ListItemIcon>
+                </ListItemIconWhite>
                 <ListItemText primary="Data Anggota" />
               </ListItemButton>
             </Link>
@@ -112,9 +122,9 @@ function Sidebar(props) {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
+                <ListItemIconWhite>
                   <StarBorder />
-                </ListItemIcon>
+                </ListItemIconWhite>
                 <ListItemText primary="Data Peminjaman" />
               </ListItemButton>
             </Link>
@@ -125,9 +135,9 @@ function Sidebar(props) {
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <ListItemButton>
-            <ListItemIcon>
+            <ListItemIconWhite>
               <ChangeCircleIcon />
-            </ListItemIcon>
+            </ListItemIconWhite>
             <ListItemText primary="Sirkulasi" />
           </ListItemButton>
         </Link>
@@ -136,9 +146,9 @@ function Sidebar(props) {
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <ListItemButton>
-            <ListItemIcon>
+            <ListItemIconWhite>
               <MenuBookIcon />
-            </ListItemIcon>
+            </ListItemIconWhite>
             <ListItemText primary="Tambah Dokumen" />
           </ListItemButton>
         </Link>
@@ -199,6 +209,9 @@ function Sidebar(props) {
           {drawer}
         </Drawer>
         <Drawer
+          classes={{
+            paper: classes.drawerPaper
+          }}
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
