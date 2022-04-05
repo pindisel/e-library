@@ -19,9 +19,10 @@ const Login = () => {
     };
     const response = await UserService.loginUser(data);
     sessionStorage.setItem("token", response.data.token);
+    sessionStorage.setItem("pengguna", JSON.stringify(response.data.pengguna));
 
-    // navigate("/dashboard");
-    // window.location.reload();
+    navigate("/dashboard");
+    window.location.reload();
   };
 
   return (

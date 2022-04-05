@@ -19,35 +19,20 @@ import { useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
   const navigate = useNavigate();
-  const deleteBook = async (id) => {
-    try {
-      await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
-        method: "DELETE",
-      });
-      navigate("/kelola-data/anggota");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  //Input Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [books, setBooks] = useState([]);
+  const [user, setUser] = useState([]);
 
+  console.log(user);
   useEffect(() => {
-    const fetchBuku = async () => {
-      const response = await UserService.getBooks();
+    const fetchUser = async () => {
+      const response = await UserService.getUser();
       const data = response.data;
-      setBooks(data);
+      setUser(data);
     };
 
-    fetchBuku();
+    fetchUser();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -60,7 +45,7 @@ const KelolaData = () => {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - user.length) : 0;
 
   return (
     <>
@@ -77,21 +62,6 @@ const KelolaData = () => {
       >
         Data Anggota
       </Typography>
-      <Button
-        variant="contained"
-        color="green"
-        startIcon={<AddBoxIcon />}
-        sx={{
-          mt: 5,
-        }}
-        style={{ borderRadius: 10 }}
-        onClick={() => {
-          handleOpen();
-        }}
-      >
-        <Typography variant="subtitle1">Tambah Anggota</Typography>
-      </Button>
-
       <TableContainer>
         <Table>
           <TableHead>
@@ -114,53 +84,27 @@ const KelolaData = () => {
               <TableCell align="center" width={50}>
                 Jenis Kelamin
               </TableCell>
-              <TableCell align="center" width={150}>
-                Kelola
-              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {books
+            {user
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
-                  <TableCell align="center">{data.idbuku}</TableCell>
-                  <TableCell align="center">{data.judul}</TableCell>
-                  <TableCell align="center">{data.pengarang}</TableCell>
-                  <TableCell align="center">{data.penerbit}</TableCell>
-                  <TableCell align="center">{data.tahun}</TableCell>
-                  <TableCell align="center">
-                    <IconButton
-                      color="green"
-                      onClick={() => {
-                        setDataModal(data);
-                        handleOpen();
-                      }}
-                    >
-                      <FiEdit />
-                    </IconButton>
-
-                    <IconButton
-                      onClick={() => deleteBook(data.id)}
-                      color="error"
-                    >
-                      <FiTrash2 />
-                    </IconButton>
-                  </TableCell>
+                  <TableCell align="center">{data.id_user}</TableCell>
+                  <TableCell align="center">{data.nama}</TableCell>
+                  <TableCell align="center">{data.level}</TableCell>
+                  <TableCell align="center">{data.unit_kerja}</TableCell>
+                  <TableCell align="center">{data.jenis_kelamin}</TableCell>
                 </TableRow>
               ))}
-            <AddEditModal
-              open={open}
-              handleClose={() => handleClose()}
-              datas={dataModal}
-            />
             {emptyRows > 0 && (
               <TableRow
                 style={{
-                  height: 73 * emptyRows,
+                  height: 53 * emptyRows,
                 }}
               >
                 <TableCell colSpan={7} />
@@ -171,7 +115,7 @@ const KelolaData = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={books.length}
+        count={user.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

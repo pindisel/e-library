@@ -8,4 +8,4 @@ export { default as TambahDokumen } from "./TambahDokumen";
 export { default as KonfrimasiSuper } from "./KonfirmasiSuper";
 export { default as KonfirmasiUser } from "./KonfirmasiUser";
 export { default as KelolaDataPeminjaman } from "./KelolaDataPeminjaman";
-export { default as DocumentViewer } from "./DocumentViewer";
+// export { default as DocumentViewer } from "./DocumentViewer";

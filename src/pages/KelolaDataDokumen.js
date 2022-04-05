@@ -14,12 +14,12 @@ import {
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
-import { BookService } from "../services/BookService";
+import { DocumentService } from "../services/DocumentService";
 import { Link, useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
   const navigate = useNavigate();
-  const deleteBook = async (id) => {
+  const deleteDocument = async (id) => {
     try {
       await fetch(`https://elibrary-back.herokuapp.com/dokumen/${id}`, {
         method: "DELETE",
@@ -42,7 +42,7 @@ const KelolaData = () => {
 
   useEffect(() => {
     const fetchBuku = async () => {
-      const response = await BookService.getBooks();
+      const response = await DocumentService.getDocument();
       const data = response.data;
       setBooks(data);
     };
@@ -77,20 +77,6 @@ const KelolaData = () => {
       >
         Data Dokumen
       </Typography>
-      <Button
-        variant="contained"
-        color="green"
-        startIcon={<AddBoxIcon />}
-        sx={{
-          mt: 5,
-        }}
-        style={{ borderRadius: 10 }}
-        onClick={() => {
-          handleOpen();
-        }}
-      >
-        <Typography variant="subtitle1">Tambah Dokumen</Typography>
-      </Button>
       <TableContainer>
         <Table>
           <TableHead>
@@ -129,10 +115,9 @@ const KelolaData = () => {
                   <TableCell align="center">{data.id_dokumen}</TableCell>
                   <TableCell align="center">{data.judul_dokumen}</TableCell>
                   <TableCell align="center">{data.id_pic}</TableCell>
-                  {/* <TableCell align="center">{data.penerbit}</TableCell> */}
                   <TableCell align="center">{data.kategori_dokumen}</TableCell>
                   <TableCell align="center">
-                    <IconButton
+                    {/* <IconButton
                       color="green"
                       onClick={() => {
                         setDataModal(data);
@@ -140,10 +125,9 @@ const KelolaData = () => {
                       }}
                     >
                       <FiEdit />
-                    </IconButton>
-
+                    </IconButton> */}
                     <IconButton
-                      onClick={() => deleteBook(data.id)}
+                      onClick={() => deleteDocument(data.id)}
                       color="error"
                     >
                       <FiTrash2 />
@@ -152,7 +136,7 @@ const KelolaData = () => {
                   <TableCell align="center">
                     <Button
                       component={Link}
-                      to={`/konfirmasi-peminjaman/dokumen-${data.id}`}
+                      to={`/konfirmasi-peminjaman/dokumen/${data.id_dokumen}`}
                       variant="contained"
                     >
                       pinjam
@@ -160,7 +144,6 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
-            {console.log(books)}
             <AddEditModal
               open={open}
               handleClose={() => handleClose()}
@@ -175,11 +158,6 @@ const KelolaData = () => {
                 <TableCell colSpan={7} />
               </TableRow>
             )}
-            <AddEditModal
-              open={open}
-              handleClose={() => handleClose()}
-              datas={dataModal}
-            />
             {emptyRows > 0 && (
               <TableRow
                 style={{

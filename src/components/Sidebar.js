@@ -35,37 +35,35 @@ import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
 import icoPeas from "../assets/ProfileImage/icoPeas.svg";
 import icoSup from "../assets/ProfileImage/icoSup.svg";
 
-const user = {
-  nama: "aidan daffa",
-  level: "Supervisor",
-};
+const user = JSON.parse(sessionStorage.getItem("pengguna"));
+// console.log(JSON.parse(user));
 
 var icoPicker = user.level;
 var colPicker;
-console.log(icoPicker);
+// console.log(icoPicker);
 
-if (icoPicker === "Anggota") {
-  colPicker = "warning";
-} else if (icoPicker === "Supervisor") {
-  colPicker = "success";
-} else if (icoPicker === "Administrator") {
-  colPicker = "primary";
-} else {
-  colPicker = "warning";
-}
+// if (icoPicker === "Anggota") {
+//   colPicker = "warning";
+// } else if (icoPicker === "Supervisor") {
+//   colPicker = "success";
+// } else if (icoPicker === "Administrator") {
+//   colPicker = "primary";
+// } else {
+//   colPicker = "warning";
+// }
 
 const IconPicker = () => {
-  if (icoPicker === "Anggota") {
+  if (icoPicker === "anggota") {
     return <img src={icoPeas} alt="icon" />;
-  } else if (icoPicker === "Supervisor") {
+  } else if (icoPicker === "supervisor") {
     return <img src={icoSup} alt="icon" />;
-  } else if (icoPicker === "Administrator") {
+  } else if (icoPicker === "admin") {
     return <img src={icoAdmin} alt="icon" />;
   } else {
     return <img src={icoPeas} alt="icon" />;
   }
 };
-console.log(colPicker);
+// console.log(colPicker);
 
 const drawerWidth = 240;
 
@@ -100,7 +98,11 @@ function Sidebar(props) {
 
   const drawer = (
     <div>
-      <Toolbar sx={{ height: "120px" }}>E-Document</Toolbar>
+      <Toolbar sx={{ height: "120px" }}>
+        <Typography variant="h5" fontWeight={600}>
+          E-Document
+        </Typography>
+      </Toolbar>
       <Divider />
       <List
         sx={{ width: "100%", maxWidth: 360, bgcolor: "green" }}
@@ -238,13 +240,13 @@ function Sidebar(props) {
               alignItems="flex-start"
             >
               <Grid item>
-                <Typography variant="h6" noWrap component="div">
+                <Typography variant="h5" noWrap component="div">
                   {user.nama}
                 </Typography>
                 <Typography variant="h6" noWrap component="div">
                   {user.level}
                 </Typography>
-                <Button variant="contained" color={colPicker}>
+                <Button variant="contained" color="error">
                   logout
                 </Button>
               </Grid>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, TextField, Button, Typography } from "@mui/material";
-import { BookService } from "../services/BookService";
+import { DocumentService } from "../services/DocumentService";
 import { useNavigate } from "react-router-dom";
 
 const AddEditModal = ({ open, handleClose, datas }) => {
@@ -9,6 +9,7 @@ const AddEditModal = ({ open, handleClose, datas }) => {
   const [pengarang, setPengarang] = useState("");
   const [penerbit, setPenerbit] = useState("");
   const [tahun, setTahun] = useState("");
+  // console.log(datas);
 
   useEffect(() => {
     if (datas !== null) {
@@ -42,9 +43,9 @@ const AddEditModal = ({ open, handleClose, datas }) => {
     console.log(dataKosong);
     if (dataKosong.length === 0) {
       if (datas === null) {
-        await BookService.addBooks(data);
+        await DocumentService.addBooks(data);
       } else {
-        await BookService.editBooks(datas.id, data);
+        await DocumentService.editBooks(datas.id, data);
       }
       navigate("/kelola-data/dokumen");
       handleClose();

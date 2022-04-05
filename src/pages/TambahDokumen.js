@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { BookService } from "../services/BookService";
+import { DocumentService } from "../services/DocumentService";
 import { useNavigate } from "react-router-dom";
 
 const TambahDokumen = () => {
@@ -36,7 +36,7 @@ const TambahDokumen = () => {
     });
 
     if (dataKosong.length === 0) {
-      await BookService.addBooks(data);
+      await DocumentService.addBooks(data);
       alert(dataKosong + "dokumen berhasil ditambahkan");
       navigate("/kelola-data/dokumen");
     } else {
@@ -82,8 +82,7 @@ const TambahDokumen = () => {
 
         <Box
           sx={{
-            width: 700,
-            maxWidth: "100%",
+            maxWidth: 700,
             m: 2,
           }}
         >
@@ -97,8 +96,7 @@ const TambahDokumen = () => {
         </Box>
         <Box
           sx={{
-            width: 700,
-            maxWidth: "100%",
+            maxWidth: 700,
             m: 2,
           }}
         >
@@ -112,8 +110,7 @@ const TambahDokumen = () => {
         </Box>
         <Box
           sx={{
-            width: 700,
-            maxWidth: "100%",
+            maxWidth: 700,
             m: 2,
           }}
         >
@@ -127,8 +124,7 @@ const TambahDokumen = () => {
         </Box>
         <Box
           sx={{
-            width: 700,
-            maxWidth: "100%",
+            maxWidth: 700,
             m: 2,
           }}
         >
@@ -142,8 +138,7 @@ const TambahDokumen = () => {
         </Box>
         <Box
           sx={{
-            width: 700,
-            maxWidth: "100%",
+            maxWidth: 700,
             m: 2,
             mt: 7,
             pl: 69,

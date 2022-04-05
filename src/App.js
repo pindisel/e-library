@@ -15,7 +15,7 @@ import {
   TambahDokumen,
   KonfirmasiUser,
   KelolaDataPeminjaman,
-  DocumentViewer,
+  // DocumentViewer,
 } from "./pages";
 import { Layout } from "./components";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -41,17 +41,13 @@ const theme = createTheme({
 
 function App() {
   const token = sessionStorage.getItem("token");
-  // const token = sessionStorage.getItem("token");
-
-  // console.log(token);
-
-  // console.log(!user);
+  const pengguna = sessionStorage.getItem("pengguna");
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          {!token === false ? (
+          {token && pengguna ? (
             <Layout>
               <Routes>
                 <Route exact path="/dashboard" element={<Dashboard />} />
@@ -67,7 +63,7 @@ function App() {
                 />
                 <Route
                   exact
-                  path="/konfirmasi-peminjaman/dokumen-:id"
+                  path="/konfirmasi-peminjaman/dokumen/:id"
                   element={<KonfirmasiUser />}
                 />
                 <Route exact path="/sirkulasi" element={<Sirkulasi />} />
@@ -102,7 +98,7 @@ function App() {
                 path="/*"
                 element={<Navigate to="/login" replace />}
               />
-              <Route exact path="/docView" element={<DocumentViewer />} />
+              {/* <Route exact path="/docView" element={<DocumentViewer />} /> */}
             </Routes>
           )}
         </Router>

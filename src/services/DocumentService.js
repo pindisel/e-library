@@ -1,7 +1,7 @@
 import { gatewayHelper } from "../utility";
 import authHeader from "./authHeader";
 
-async function getBooks() {
+async function getDocument() {
   const body = {};
   const response = await gatewayHelper.http("GET", "dokumen", body);
   return response;
@@ -19,15 +19,15 @@ async function editBooks(id, data) {
   return response;
 }
 
-async function getBooksById(id) {
+async function getDocumentById(id) {
   const body = {};
   const response = await gatewayHelper.http("GET", `dokumen/${id}`, body);
   return response;
 }
 
-export const BookService = {
-  getBooks,
+export const DocumentService = {
+  getDocument,
   addBooks,
   editBooks,
-  getBooksById,
+  getDocumentById,
 };
