@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FolderIcon from "@mui/icons-material/Folder";
 import SpeedIcon from "@mui/icons-material/Speed";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+// import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import {
   styled,
@@ -26,12 +26,46 @@ import {
   Typography,
   Toolbar,
   Grid,
-  Item,
   Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
+import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
+import icoPeas from "../assets/ProfileImage/icoPeas.svg";
+import icoSup from "../assets/ProfileImage/icoSup.svg";
+
+const user = {
+  nama: "aidan daffa",
+  level: "Supervisor",
+};
+
+var icoPicker = user.level;
+var colPicker;
+console.log(icoPicker);
+
+if (icoPicker === "Anggota") {
+  colPicker = "warning";
+} else if (icoPicker === "Supervisor") {
+  colPicker = "success";
+} else if (icoPicker === "Administrator") {
+  colPicker = "primary";
+} else {
+  colPicker = "warning";
+}
+
+const IconPicker = () => {
+  if (icoPicker === "Anggota") {
+    return <img src={icoPeas} alt="icon" />;
+  } else if (icoPicker === "Supervisor") {
+    return <img src={icoSup} alt="icon" />;
+  } else if (icoPicker === "Administrator") {
+    return <img src={icoAdmin} alt="icon" />;
+  } else {
+    return <img src={icoPeas} alt="icon" />;
+  }
+};
+console.log(colPicker);
 
 const drawerWidth = 240;
 
@@ -195,7 +229,7 @@ function Sidebar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ ml: "auto",mr:"65px",mt:"10px"}}>
+          <Box sx={{ ml: "auto", mr: 2, mt: "10px" }}>
             <Grid
               container
               spacing={3}
@@ -205,17 +239,17 @@ function Sidebar(props) {
             >
               <Grid item>
                 <Typography variant="h6" noWrap component="div">
-                  Nama
+                  {user.nama}
                 </Typography>
                 <Typography variant="h6" noWrap component="div">
-                  Role
+                  {user.level}
                 </Typography>
-                <Button variant="contained" color="error">
+                <Button variant="contained" color={colPicker}>
                   logout
                 </Button>
               </Grid>
               <Grid item>
-               <AccountBoxIcon sx={{ fontSize: 100 }}/>
+                <IconPicker />
               </Grid>
             </Grid>
           </Box>

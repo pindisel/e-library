@@ -15,6 +15,7 @@ import {
   TambahDokumen,
   KonfirmasiUser,
   KelolaDataPeminjaman,
+  DocumentViewer,
 } from "./pages";
 import { Layout } from "./components";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -101,6 +102,7 @@ function App() {
                 path="/*"
                 element={<Navigate to="/login" replace />}
               />
+              <Route exact path="/docView" element={<DocumentViewer />} />
             </Routes>
           )}
         </Router>
