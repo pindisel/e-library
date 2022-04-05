@@ -90,7 +90,6 @@ const TambahDokumen = () => {
           <Typography>Judul</Typography>
           <TextField
             fullWidth
-            id="fullWidth"
             required
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
@@ -106,7 +105,6 @@ const TambahDokumen = () => {
           <Typography>Pengarang</Typography>
           <TextField
             fullWidth
-            id="fullWidth"
             required
             value={pengarang}
             onChange={(e) => setPengarang(e.target.value)}
@@ -122,7 +120,6 @@ const TambahDokumen = () => {
           <Typography>Penerbit</Typography>
           <TextField
             fullWidth
-            id="fullWidth"
             required
             value={penerbit}
             onChange={(e) => setPenerbit(e.target.value)}
@@ -138,7 +135,6 @@ const TambahDokumen = () => {
           <Typography>Tahun</Typography>
           <TextField
             fullWidth
-            id="fullWidth"
             required
             value={tahun}
             onChange={(e) => setTahun(e.target.value.toString())}

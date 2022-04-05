@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography, Box, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { UserService } from "../services/UserService";
 
-const Login = ({ setloggedIn }) => {
+const Login = () => {
   const navigate = useNavigate();
-  function onSubmit() {
-    if (
-      false
-      // email === null ||
-      // !email.trim() ||
-      // !email.match(
-      //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      // )
-    ) {
-      alert("Please fill all the details!");
-    } else {
-      navigate("/dashboard");
-      setloggedIn(true);
-    }
-  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(email);
-  console.log(password);
+  // console.log(email);
+  // console.log(password);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+    const response = await UserService.loginUser(data);
+    sessionStorage.setItem("token", response.data.token);
+
+    // navigate("/dashboard");
+    // window.location.reload();
+  };
 
   return (
     <>
@@ -48,7 +48,6 @@ const Login = ({ setloggedIn }) => {
               Email
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"
@@ -60,7 +59,6 @@ const Login = ({ setloggedIn }) => {
               Password
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"

@@ -21,7 +21,7 @@ const KelolaData = () => {
   const navigate = useNavigate();
   const deleteBook = async (id) => {
     try {
-      await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
+      await fetch(`https://elibrary-back.herokuapp.com/dokumen/${id}`, {
         method: "DELETE",
       });
       navigate("/kelola-data/dokumen");
@@ -91,7 +91,6 @@ const KelolaData = () => {
       >
         <Typography variant="subtitle1">Tambah Dokumen</Typography>
       </Button>
-
       <TableContainer>
         <Table>
           <TableHead>
@@ -108,17 +107,14 @@ const KelolaData = () => {
               <TableCell align="center" width={200}>
                 PIC
               </TableCell>
-              {/* <TableCell align="center" width={200}>
-                Penerbit
-              </TableCell> */}
               <TableCell align="center" width={50}>
-                Tahun
+                Kategori
               </TableCell>
               <TableCell align="center" width={150}>
                 Kelola
               </TableCell>
               <TableCell align="center" width={150}>
-                pinjam?
+                Pinjam?
               </TableCell>
             </TableRow>
           </TableHead>
@@ -130,11 +126,11 @@ const KelolaData = () => {
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
-                  <TableCell align="center">{data.idbuku}</TableCell>
-                  <TableCell align="center">{data.judul}</TableCell>
-                  <TableCell align="center">{data.pengarang}</TableCell>
+                  <TableCell align="center">{data.id_dokumen}</TableCell>
+                  <TableCell align="center">{data.judul_dokumen}</TableCell>
+                  <TableCell align="center">{data.id_pic}</TableCell>
                   {/* <TableCell align="center">{data.penerbit}</TableCell> */}
-                  <TableCell align="center">{data.tahun}</TableCell>
+                  <TableCell align="center">{data.kategori_dokumen}</TableCell>
                   <TableCell align="center">
                     <IconButton
                       color="green"
@@ -153,7 +149,6 @@ const KelolaData = () => {
                       <FiTrash2 />
                     </IconButton>
                   </TableCell>
-
                   <TableCell align="center">
                     <Button
                       component={Link}
@@ -165,6 +160,7 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            {console.log(books)}
             <AddEditModal
               open={open}
               handleClose={() => handleClose()}

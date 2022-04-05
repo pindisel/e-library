@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -39,20 +39,21 @@ const theme = createTheme({
 });
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(false);
+  const token = sessionStorage.getItem("token");
+  // const token = sessionStorage.getItem("token");
+
+  // console.log(token);
+
+  // console.log(!user);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          {loggedIn ? (
+          {!token === false ? (
             <Layout>
               <Routes>
-                <Route
-                  exact
-                  path="/dashboard"
-                  element={<Dashboard loggedIn={loggedIn} />}
-                />
+                <Route exact path="/dashboard" element={<Dashboard />} />
                 <Route
                   exact
                   path="/"
@@ -84,15 +85,16 @@ function App() {
                   path="/kelola-data/peminjaman"
                   element={<KelolaDataPeminjaman />}
                 />
+                <Route
+                  exact
+                  path="/*"
+                  element={<Navigate to="/dashboard" replace />}
+                />
               </Routes>
             </Layout>
           ) : (
             <Routes>
-              <Route
-                exact
-                path="/login"
-                element={<Login setloggedIn={setloggedIn} />}
-              />
+              <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
               <Route
                 exact

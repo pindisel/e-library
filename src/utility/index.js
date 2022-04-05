@@ -1,9 +1,12 @@
 import axios from "axios";
+import authHeader from "../services/authHeader";
 
 const BASE_URL = "https://elibrary-back.herokuapp.com";
 
 async function http(method, endpoint, body = null, data) {
-  const headers = { "Content-Type": "application/json" };
+  // const headers = { "Content-Type": "application/json" };
+  const headers = authHeader();
+  console.log(headers);
   let response = null;
 
   if (method) {

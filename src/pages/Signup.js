@@ -138,7 +138,6 @@ const Signup = () => {
               Nama
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"
@@ -150,7 +149,6 @@ const Signup = () => {
               Email
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"
@@ -176,7 +174,6 @@ const Signup = () => {
               Password
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"
@@ -195,7 +192,6 @@ const Signup = () => {
               No. KTP
             </Typography>
             <TextField
-              id="outlined-basic"
               variant="outlined"
               color="darkBlue"
               size="small"
@@ -214,6 +210,7 @@ const Signup = () => {
               Unit Kerja
             </Typography>
             <Select
+              value={""}
               fullWidth
               size="small"
               onChange={(e) => setUnitKerja(e.target.value)}
@@ -228,6 +225,7 @@ const Signup = () => {
               Level
             </Typography>
             <Select
+              value={""}
               fullWidth
               size="small"
               onChange={(e) => setLevel(e.target.value)}

@@ -18,8 +18,16 @@ async function editUser(id, data) {
   return response;
 }
 
+async function loginUser(data) {
+  const body = {};
+  const response = await gatewayHelper.http("POST", "login", body, data);
+  // console.log(response.data.token);
+  return response;
+}
+
 export const UserService = {
   getUser,
   addUser,
   editUser,
+  loginUser,
 };
