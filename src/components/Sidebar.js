@@ -1,57 +1,60 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
 import FolderIcon from "@mui/icons-material/Folder";
 import SpeedIcon from "@mui/icons-material/Speed";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import { styled } from "@mui/material";
+import {
+  styled,
+  AppBar,
+  Box,
+  CssBaseline,
+  Divider,
+  Drawer,
+  IconButton,
+  ListSubheader,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+  Typography,
+  Toolbar,
+  Grid,
+  Item,
+  Button,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { useTheme } from '@mui/material/styles';
-
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(() => {
-  return ({
-  drawerPaper: {
-    width: (theme) => theme.drawerWidth,
-    backgroundColor: "rgba(0, 23, 48, 1)",
-    color:"white",
-  },
-
-})});
-
-
-const ListItemIconWhite = styled(ListItemIcon)({
-  color: 'white',
+  return {
+    drawerPaper: {
+      width: (theme) => theme.drawerWidth,
+      backgroundColor: "rgba(0, 23, 48, 1)",
+      color: "white",
+    },
+  };
 });
 
+const ListItemIconWhite = styled(ListItemIcon)({
+  color: "white",
+});
 
 function Sidebar(props) {
-  const { window } = props;  
+  const { window } = props;
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [open, setOpen] = React.useState(true);
   const classes = useStyles(theme);
-
 
   const handleClick = () => {
     setOpen(!open);
@@ -61,16 +64,25 @@ function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer =(
+  const drawer = (
     <div>
-      <Toolbar>E-Document</Toolbar>
+      <Toolbar sx={{ height: "120px" }}>E-Document</Toolbar>
       <Divider />
       <List
         sx={{ width: "100%", maxWidth: 360, bgcolor: "green" }}
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader style={{ backgroundColor: "#001730", color:"white" }} component="div" id="nested-list-subheader">
+          <ListSubheader
+            style={{
+              backgroundColor: "#001730",
+              color: "white",
+              fontSize: "20px",
+              marginTop: "18px",
+            }}
+            component="div"
+            id="nested-list-subheader"
+          >
             Main Navigation
           </ListSubheader>
         }
@@ -166,7 +178,11 @@ function Sidebar(props) {
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          height: "120px",
           ml: { sm: `${drawerWidth}px` },
+          bgcolor: "white",
+          color: "black",
+          boxShadow: "0",
         }}
       >
         <Toolbar>
@@ -179,9 +195,30 @@ function Sidebar(props) {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap component="div">
-            Nama
-          </Typography> */}
+          <Box sx={{ ml: "auto",mr:"65px",mt:"10px"}}>
+            <Grid
+              container
+              spacing={3}
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+            >
+              <Grid item>
+                <Typography variant="h6" noWrap component="div">
+                  Nama
+                </Typography>
+                <Typography variant="h6" noWrap component="div">
+                  Role
+                </Typography>
+                <Button variant="contained" color="error">
+                  logout
+                </Button>
+              </Grid>
+              <Grid item>
+               <AccountBoxIcon sx={{ fontSize: 100 }}/>
+              </Grid>
+            </Grid>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -210,7 +247,7 @@ function Sidebar(props) {
         </Drawer>
         <Drawer
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           variant="permanent"
           sx={{

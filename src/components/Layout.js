@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
     <RootStyle>
       <Sidebar />
       <LayoutStyle>
-        <Box sx={{ m: 2, mt: 10 }}>{children}</Box>
+        <Box sx={{ m: 2, mt: 18 }}>{children}</Box>
       </LayoutStyle>
     </RootStyle>
   );
