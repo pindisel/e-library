@@ -43,7 +43,7 @@ const AddEditModal = ({ open, handleClose, datas }) => {
     console.log(dataKosong);
     if (dataKosong.length === 0) {
       if (datas === null) {
-        await DocumentService.addBooks(data);
+        await DocumentService.addDocument(data);
       } else {
         await DocumentService.editBooks(datas.id, data);
       }

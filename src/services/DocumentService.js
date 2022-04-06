@@ -7,7 +7,7 @@ async function getDocument() {
   return response;
 }
 
-async function addBooks(data) {
+async function addDocument(data) {
   const body = {};
   const response = await gatewayHelper.http("POST", "dokumen", body, data);
   return response;
@@ -27,7 +27,7 @@ async function getDocumentById(id) {
 
 export const DocumentService = {
   getDocument,
-  addBooks,
+  addDocument,
   editBooks,
   getDocumentById,
 };
