@@ -210,7 +210,7 @@ const Signup = () => {
               Unit Kerja
             </Typography>
             <Select
-              value={""}
+              value={unitKerja}
               fullWidth
               size="small"
               onChange={(e) => setUnitKerja(e.target.value)}
@@ -225,7 +225,7 @@ const Signup = () => {
               Level
             </Typography>
             <Select
-              value={""}
+              value={level}
               fullWidth
               size="small"
               onChange={(e) => setLevel(e.target.value)}

@@ -35,8 +35,6 @@ import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
 import icoPeas from "../assets/ProfileImage/icoPeas.svg";
 import icoSup from "../assets/ProfileImage/icoSup.svg";
 
-const user = JSON.parse(sessionStorage.getItem("pengguna"));
-
 // console.log(icoPicker);
 
 // if (icoPicker === "Anggota") {
@@ -49,8 +47,8 @@ const user = JSON.parse(sessionStorage.getItem("pengguna"));
 //   colPicker = "warning";
 // }
 
-
- function Sidebar(props) {
+function Sidebar(props) {
+  const user = JSON.parse(sessionStorage.getItem("pengguna"));
   var icoPicker = user.level;
   const IconPicker = () => {
     if (icoPicker === "anggota") {
@@ -63,10 +61,9 @@ const user = JSON.parse(sessionStorage.getItem("pengguna"));
       return <img src={icoPeas} alt="icon" />;
     }
   };
-  // console.log(colPicker);
-  
+
   const drawerWidth = 240;
-  
+
   const useStyles = makeStyles(() => {
     return {
       drawerPaper: {
@@ -76,7 +73,7 @@ const user = JSON.parse(sessionStorage.getItem("pengguna"));
       },
     };
   });
-  
+
   const ListItemIconWhite = styled(ListItemIcon)({
     color: "white",
   });
@@ -152,17 +149,20 @@ const user = JSON.parse(sessionStorage.getItem("pengguna"));
                 <ListItemText primary="Data Dokumen" />
               </ListItemButton>
             </Link>
-            <Link
-              to="/kelola-data/anggota"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIconWhite>
-                  <StarBorder />
-                </ListItemIconWhite>
-                <ListItemText primary="Data Anggota" />
-              </ListItemButton>
-            </Link>
+            {user.level !== "anggota" ? (
+              <Link
+                to="/kelola-data/anggota"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIconWhite>
+                    <StarBorder />
+                  </ListItemIconWhite>
+                  <ListItemText primary="Data Anggota" />
+                </ListItemButton>
+              </Link>
+            ) : null}
+
             <Link
               to="/kelola-data/peminjaman"
               style={{ textDecoration: "none", color: "inherit" }}
@@ -238,11 +238,16 @@ const user = JSON.parse(sessionStorage.getItem("pengguna"));
               alignItems="flex-start"
             >
               <Grid item>
-                <Typography variant="h5" noWrap component="div">
+                <Typography
+                  variant="h5"
+                  fontWeight={600}
+                  noWrap
+                  component="div"
+                >
                   {user.nama}
                 </Typography>
                 <Typography variant="h6" noWrap component="div">
-                  {user.level}
+                  {user.level.charAt(0).toUpperCase() + user.level.slice(1)}
                 </Typography>
                 <Button variant="contained" color="error">
                   logout
