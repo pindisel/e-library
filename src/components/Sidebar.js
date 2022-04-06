@@ -62,9 +62,6 @@ function Sidebar(props) {
     }
   };
 
-  var hideParam;
-  icoPicker === "anggota" ? (hideParam = "none") : (hideParam = "block");
-
   const drawerWidth = 240;
 
   const useStyles = makeStyles(() => {
@@ -121,12 +118,17 @@ function Sidebar(props) {
           </ListSubheader>
         }
       >
-        <ListItemButton component={Link} to="/dashboard">
-          <ListItemIconWhite>
-            <SpeedIcon />
-          </ListItemIconWhite>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
+        <Link
+          to="/dashboard"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <ListItemButton>
+            <ListItemIconWhite>
+              <SpeedIcon />
+            </ListItemIconWhite>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </Link>
         <ListItemButton onClick={handleClick}>
           <ListItemIconWhite>
             <FolderIcon />
@@ -136,60 +138,66 @@ function Sidebar(props) {
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton
-              component={Link}
+            <Link
               to="/kelola-data/dokumen"
-              sx={{ pl: 4 }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemIconWhite>
-                <StarBorder />
-              </ListItemIconWhite>
-              <ListItemText primary="Data Dokumen" />
-            </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIconWhite>
+                  <StarBorder />
+                </ListItemIconWhite>
+                <ListItemText primary="Data Dokumen" />
+              </ListItemButton>
+            </Link>
+            {user.level !== "anggota" ? (
+              <Link
+                to="/kelola-data/anggota"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIconWhite>
+                    <StarBorder />
+                  </ListItemIconWhite>
+                  <ListItemText primary="Data Anggota" />
+                </ListItemButton>
+              </Link>
+            ) : null}
 
-            <ListItemButton
-              component={Link}
-              to="/kelola-data/anggota"
-              sx={{ pl: 4, display: `${hideParam}` }}
-            >
-              <ListItemIconWhite>
-                <StarBorder />
-              </ListItemIconWhite>
-              <ListItemText primary="Data Anggota" />
-            </ListItemButton>
-
-            <ListItemButton
-              component={Link}
+            <Link
               to="/kelola-data/peminjaman"
-              sx={{ pl: 4 }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemIconWhite>
-                <StarBorder />
-              </ListItemIconWhite>
-              <ListItemText primary="Data Peminjaman" />
-            </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIconWhite>
+                  <StarBorder />
+                </ListItemIconWhite>
+                <ListItemText primary="Data Peminjaman" />
+              </ListItemButton>
+            </Link>
           </List>
         </Collapse>{" "}
-        <ListItemButton
-          component={Link}
+        <Link
           to="/sirkulasi"
-          sx={{ display: `${hideParam}` }}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-          <ListItemIconWhite>
-            <ChangeCircleIcon />
-          </ListItemIconWhite>
-          <ListItemText primary="Sirkulasi" />
-        </ListItemButton>
-        <ListItemButton
-          component={Link}
+          <ListItemButton>
+            <ListItemIconWhite>
+              <ChangeCircleIcon />
+            </ListItemIconWhite>
+            <ListItemText primary="Sirkulasi" />
+          </ListItemButton>
+        </Link>
+        <Link
           to="/tambah-dokumen"
-          sx={{ display: `${hideParam}` }}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-          <ListItemIconWhite>
-            <MenuBookIcon />
-          </ListItemIconWhite>
-          <ListItemText primary="Tambah Dokumen" />
-        </ListItemButton>
+          <ListItemButton>
+            <ListItemIconWhite>
+              <MenuBookIcon />
+            </ListItemIconWhite>
+            <ListItemText primary="Tambah Dokumen" />
+          </ListItemButton>
+        </Link>
       </List>
     </div>
   );
