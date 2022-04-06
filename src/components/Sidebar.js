@@ -36,10 +36,7 @@ import icoPeas from "../assets/ProfileImage/icoPeas.svg";
 import icoSup from "../assets/ProfileImage/icoSup.svg";
 
 const user = JSON.parse(sessionStorage.getItem("pengguna"));
-// console.log(JSON.parse(user));
 
-var icoPicker = user.level;
-var colPicker;
 // console.log(icoPicker);
 
 // if (icoPicker === "Anggota") {
@@ -52,36 +49,37 @@ var colPicker;
 //   colPicker = "warning";
 // }
 
-const IconPicker = () => {
-  if (icoPicker === "anggota") {
-    return <img src={icoPeas} alt="icon" />;
-  } else if (icoPicker === "supervisor") {
-    return <img src={icoSup} alt="icon" />;
-  } else if (icoPicker === "admin") {
-    return <img src={icoAdmin} alt="icon" />;
-  } else {
-    return <img src={icoPeas} alt="icon" />;
-  }
-};
-// console.log(colPicker);
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles(() => {
-  return {
-    drawerPaper: {
-      width: (theme) => theme.drawerWidth,
-      backgroundColor: "rgba(0, 23, 48, 1)",
-      color: "white",
-    },
+ function Sidebar(props) {
+  var icoPicker = user.level;
+  const IconPicker = () => {
+    if (icoPicker === "anggota") {
+      return <img src={icoPeas} alt="icon" />;
+    } else if (icoPicker === "supervisor") {
+      return <img src={icoSup} alt="icon" />;
+    } else if (icoPicker === "admin") {
+      return <img src={icoAdmin} alt="icon" />;
+    } else {
+      return <img src={icoPeas} alt="icon" />;
+    }
   };
-});
-
-const ListItemIconWhite = styled(ListItemIcon)({
-  color: "white",
-});
-
-function Sidebar(props) {
+  // console.log(colPicker);
+  
+  const drawerWidth = 240;
+  
+  const useStyles = makeStyles(() => {
+    return {
+      drawerPaper: {
+        width: (theme) => theme.drawerWidth,
+        backgroundColor: "rgba(0, 23, 48, 1)",
+        color: "white",
+      },
+    };
+  });
+  
+  const ListItemIconWhite = styled(ListItemIcon)({
+    color: "white",
+  });
   const { window } = props;
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
