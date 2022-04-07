@@ -12,7 +12,6 @@ import {
   Button,
 } from "@mui/material";
 import { FiTrash2, FiEdit } from "react-icons/fi";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { UserService } from "../services/UserService";
 import { useNavigate } from "react-router-dom";
@@ -86,22 +85,16 @@ const KelolaData = () => {
                 No
               </TableCell>
               <TableCell align="center" width={100}>
-                Id Anggota
+                Judul Dokumen
               </TableCell>
               <TableCell align="center" width={200}>
                 Nama Anggota
               </TableCell>
               <TableCell align="center" width={200}>
-                Username
+                Tanggal Peminjaman
               </TableCell>
               <TableCell align="center" width={200}>
-                Level Anggota
-              </TableCell>
-              <TableCell align="center" width={50}>
-                Jenis Kelamin
-              </TableCell>
-              <TableCell align="center" width={150}>
-                Kelola
+                Status
               </TableCell>
             </TableRow>
           </TableHead>
@@ -117,7 +110,6 @@ const KelolaData = () => {
                   <TableCell align="center">{data.judul}</TableCell>
                   <TableCell align="center">{data.pengarang}</TableCell>
                   <TableCell align="center">{data.penerbit}</TableCell>
-                  <TableCell align="center">{data.tahun}</TableCell>
                   <TableCell align="center">
                     <IconButton
                       color="green"
