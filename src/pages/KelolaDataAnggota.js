@@ -8,18 +8,10 @@ import {
   TableCell,
   TableBody,
   TablePagination,
-  IconButton,
-  Button,
 } from "@mui/material";
-import { FiTrash2, FiEdit } from "react-icons/fi";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { AddEditModal } from "../components";
 import { UserService } from "../services/UserService";
-import { useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
-  const navigate = useNavigate();
-
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [user, setUser] = useState([]);

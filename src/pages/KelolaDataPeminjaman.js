@@ -9,10 +9,8 @@ import {
   TableBody,
   TablePagination,
   IconButton,
-  Button,
 } from "@mui/material";
 import { FiTrash2, FiEdit } from "react-icons/fi";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AddEditModal } from "../components";
 import { UserService } from "../services/UserService";
 import { useNavigate } from "react-router-dom";

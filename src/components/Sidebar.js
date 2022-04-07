@@ -27,7 +27,7 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
 import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";

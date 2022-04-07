@@ -1,5 +1,4 @@
 import { gatewayHelper } from "../utility";
-import authHeader from "./authHeader";
 
 async function getDocument() {
   const body = {};

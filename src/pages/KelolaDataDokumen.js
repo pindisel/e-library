@@ -11,9 +11,8 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { FiTrash2, FiEdit } from "react-icons/fi";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { AddEditModal } from "../components";
+import { FiTrash2 } from "react-icons/fi";
+// import { AddEditModal } from "../components";
 import { DocumentService } from "../services/DocumentService";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -31,10 +30,9 @@ const KelolaData = () => {
   };
 
   //Input Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [dataModal, setDataModal] = useState(null);
+  // const [open, setOpen] = useState(false);
+  // const handleClose = () => setOpen(false);
+  // const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -144,11 +142,11 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
-            <AddEditModal
+            {/* <AddEditModal
               open={open}
               handleClose={() => handleClose()}
               datas={dataModal}
-            />
+            /> */}
             {emptyRows > 0 && (
               <TableRow
                 style={{
