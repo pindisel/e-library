@@ -14,6 +14,7 @@ import {
   Signup,
   TambahDokumen,
   KonfirmasiUser,
+  KonfirmasiSuper,
   KelolaDataPeminjaman,
   DocViewer,
 } from "./pages";
@@ -82,12 +83,12 @@ function App() {
                   path="/kelola-data/peminjaman"
                   element={<KelolaDataPeminjaman />}
                 />
+                <Route exact path="/docView" element={<DocViewer />} />
                 <Route
                   exact
                   path="/*"
                   element={<Navigate to="/dashboard" replace />}
                 />
-                <Route exact path="/docView" element={<DocViewer />} />
               </Routes>
             </Layout>
           ) : (
@@ -99,7 +100,6 @@ function App() {
                 path="/*"
                 element={<Navigate to="/login" replace />}
               />
-              
             </Routes>
           )}
         </Router>

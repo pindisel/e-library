@@ -30,9 +30,30 @@ async function borrowDocument(data) {
   return response;
 }
 
-async function getBorrowedDocument(id){
+async function getBorrowedDocument(id) {
   const body = {};
   const response = await gatewayHelper.http("GET", `peminjaman/${id}`, body);
+  return response;
+}
+
+async function getBorrowedSuper(id) {
+  const body = {};
+  const response = await gatewayHelper.http(
+    "GET",
+    `peminjaman/konfirmasi/${id}`,
+    body
+  );
+  return response;
+}
+
+async function editStatus(id, data) {
+  const body = {};
+  const response = await gatewayHelper.http(
+    "PUT",
+    `peminjaman/${id}`,
+    body,
+    data
+  );
   return response;
 }
 
@@ -43,4 +64,6 @@ export const DocumentService = {
   getDocumentById,
   borrowDocument,
   getBorrowedDocument,
+  getBorrowedSuper,
+  editStatus,
 };

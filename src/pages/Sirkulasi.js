@@ -8,33 +8,33 @@ import {
   TableCell,
   TableBody,
   TablePagination,
-  IconButton,
   Button,
 } from "@mui/material";
-import { FiTrash2, FiEdit } from "react-icons/fi";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { AddEditModal } from "../components";
-import { UserService } from "../services/UserService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { DocumentService } from "../services/DocumentService";
+import { KonfirmasiModal } from "../components";
 
 const Sirkulasi = () => {
   const navigate = useNavigate();
 
-  //Input Modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [dataModal, setDataModal] = useState(null);
 
+  const user = JSON.parse(sessionStorage.getItem("pengguna"));
+  // console.log(user);
+  const id = user.id_user;
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [books, setBooks] = useState([]);
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     const fetchBuku = async () => {
-      const response = await UserService.getBooks();
+      const response = await DocumentService.getBorrowedSuper(id);
       const data = response.data;
-      setBooks(data);
+      setDocuments(data);
     };
 
     fetchBuku();
@@ -50,7 +50,7 @@ const Sirkulasi = () => {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - documents.length) : 0;
 
   return (
     <>
@@ -90,21 +90,37 @@ const Sirkulasi = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books
+            {documents
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
-                  <TableCell align="center">{data.idbuku}</TableCell>
-                  <TableCell align="center">{data.judul}</TableCell>
-                  <TableCell align="center">{data.pengarang}</TableCell>
-                  <TableCell align="center">{data.penerbit}</TableCell>
-                  <TableCell align="center">{data.tahun}</TableCell>
+                  <TableCell align="center">{data.judul_dokumen}</TableCell>
+                  <TableCell align="center">{data.nama}</TableCell>
+                  <TableCell align="center">
+                    {new Date(data.tanggal_peminjaman).toDateString()}
+                  </TableCell>
+                  <TableCell align="center">
+                    {data.konfirmasi.charAt(0).toUpperCase() +
+                      data.konfirmasi.slice(1)}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="darkBlue"
+                      onClick={() => {
+                        setDataModal(data);
+                        handleOpen();
+                      }}
+                    >
+                      <Typography variant="subtitle1">Confirm</Typography>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
-            <AddEditModal
+            <KonfirmasiModal
               open={open}
               handleClose={() => handleClose()}
               datas={dataModal}
@@ -123,7 +139,7 @@ const Sirkulasi = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={books.length}
+        count={documents.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}

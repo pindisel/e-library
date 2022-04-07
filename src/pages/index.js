@@ -5,7 +5,6 @@ export { default as Login } from "./Login";
 export { default as Signup } from "./Signup";
 export { default as Sirkulasi } from "./Sirkulasi";
 export { default as TambahDokumen } from "./TambahDokumen";
-export { default as KonfrimasiSuper } from "./KonfirmasiSuper";
 export { default as KonfirmasiUser } from "./KonfirmasiUser";
 export { default as KelolaDataPeminjaman } from "./KelolaDataPeminjaman";
 export { default as DocViewer } from "./DocViewer";

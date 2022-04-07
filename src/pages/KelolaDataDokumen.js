@@ -137,7 +137,7 @@ const KelolaData = () => {
                       to={`/konfirmasi-peminjaman/dokumen/${data.id_dokumen}`}
                       variant="contained"
                     >
-                      pinjam
+                      <Typography variant="subtitle1">Pinjam</Typography>
                     </Button>
                   </TableCell>
                 </TableRow>

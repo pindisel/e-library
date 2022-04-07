@@ -260,7 +260,7 @@ const Sidebar = (props) => {
                   {user.level.charAt(0).toUpperCase() + user.level.slice(1)}
                 </Typography>
                 <Button onClick={logOut} variant="contained" color="error">
-                  logout
+                  <Typography variant="subtitle1">Logout</Typography>
                 </Button>
               </Grid>
               <Grid item>
