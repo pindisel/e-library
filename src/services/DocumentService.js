@@ -25,9 +25,16 @@ async function getDocumentById(id) {
   return response;
 }
 
+async function borrowDocument(data) {
+  const body = {};
+  const response = await gatewayHelper.http("POST", "peminjaman", body, data);
+  return response;
+}
+
 export const DocumentService = {
   getDocument,
   addDocument,
   editBooks,
   getDocumentById,
+  borrowDocument,
 };

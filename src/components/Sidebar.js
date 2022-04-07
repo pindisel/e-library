@@ -34,7 +34,6 @@ import { useTheme } from "@mui/material/styles";
 import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
 import icoPeas from "../assets/ProfileImage/icoPeas.svg";
 import icoSup from "../assets/ProfileImage/icoSup.svg";
-import { useNavigate } from "react-router-dom";
 
 // console.log(icoPicker);
 
