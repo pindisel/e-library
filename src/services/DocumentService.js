@@ -30,10 +30,17 @@ async function borrowDocument(data) {
   return response;
 }
 
+async function getBorrowedDocument(id){
+  const body = {};
+  const response = await gatewayHelper.http("GET", `peminjaman/${id}`, body);
+  return response;
+}
+
 export const DocumentService = {
   getDocument,
   addDocument,
   editBooks,
   getDocumentById,
   borrowDocument,
+  getBorrowedDocument,
 };
