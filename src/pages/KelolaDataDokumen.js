@@ -39,13 +39,13 @@ const KelolaData = () => {
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
-    const fetchBuku = async () => {
+    const fetchDokumen = async () => {
       const response = await DocumentService.getDocument();
       const data = response.data;
       setDocuments(data);
     };
 
-    fetchBuku();
+    fetchDokumen();
   }, []);
 
   const handleChangePage = (event, newPage) => {

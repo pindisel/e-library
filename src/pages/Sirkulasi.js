@@ -19,16 +19,6 @@ import { useNavigate } from "react-router-dom";
 
 const Sirkulasi = () => {
   const navigate = useNavigate();
-  const deleteBook = async (id) => {
-    try {
-      await fetch(`https://elibrary-back.herokuapp.com/buku/${id}`, {
-        method: "DELETE",
-      });
-      navigate("/sirkulasi/");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   //Input Modal
   const [open, setOpen] = useState(false);
@@ -77,21 +67,6 @@ const Sirkulasi = () => {
       >
         Sirkulasi Peminjaman
       </Typography>
-      <Button
-        variant="contained"
-        color="green"
-        startIcon={<AddBoxIcon />}
-        sx={{
-          mt: 5,
-        }}
-        style={{ borderRadius: 10 }}
-        onClick={() => {
-          handleOpen();
-        }}
-      >
-        <Typography variant="subtitle1">Tambah Anggota</Typography>
-      </Button>
-
       <TableContainer>
         <Table>
           <TableHead>
@@ -100,23 +75,18 @@ const Sirkulasi = () => {
                 No
               </TableCell>
               <TableCell align="center" width={100}>
-                Id Anggota
+                Judul Dokumen
               </TableCell>
               <TableCell align="center" width={200}>
-                Nama Anggota
+                Nama Peminjam
               </TableCell>
               <TableCell align="center" width={200}>
-                Username
+                Tanggal Peminjaman
               </TableCell>
               <TableCell align="center" width={200}>
-                Level Anggota
+                Status
               </TableCell>
-              <TableCell align="center" width={50}>
-                Jenis Kelamin
-              </TableCell>
-              <TableCell align="center" width={150}>
-                Kelola
-              </TableCell>
+              <TableCell align="center" width={150}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -132,24 +102,6 @@ const Sirkulasi = () => {
                   <TableCell align="center">{data.pengarang}</TableCell>
                   <TableCell align="center">{data.penerbit}</TableCell>
                   <TableCell align="center">{data.tahun}</TableCell>
-                  <TableCell align="center">
-                    <IconButton
-                      color="green"
-                      onClick={() => {
-                        setDataModal(data);
-                        handleOpen();
-                      }}
-                    >
-                      <FiEdit />
-                    </IconButton>
-
-                    <IconButton
-                      onClick={() => deleteBook(data.id)}
-                      color="error"
-                    >
-                      <FiTrash2 />
-                    </IconButton>
-                  </TableCell>
                 </TableRow>
               ))}
             <AddEditModal
