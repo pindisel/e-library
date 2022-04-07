@@ -69,7 +69,7 @@ const Signup = () => {
     var dataKosong = [];
     for (const key in data) {
       if (data[key] === null || data[key].match(/^\s*$/)) {
-        console.log(key);
+        // console.log(key);
         dataKosong.push(
           key.charAt(0).toUpperCase() + key.slice(1).replaceAll("_", " ")
         );

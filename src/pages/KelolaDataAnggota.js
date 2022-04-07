@@ -24,7 +24,7 @@ const KelolaData = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [user, setUser] = useState([]);
 
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     const fetchUser = async () => {
       const response = await UserService.getUser();

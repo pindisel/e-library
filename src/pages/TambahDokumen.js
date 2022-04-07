@@ -11,7 +11,7 @@ import {
   Radio,
 } from "@mui/material";
 import { DocumentService } from "../services/DocumentService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
@@ -68,18 +68,16 @@ const TambahDokumen = () => {
     formData.append("kategori_dokumen", kategori);
     formData.append("file", files[0]);
 
-    console.log(Array.from(formData));
-    await DocumentService.addDocument(formData);
-
     const data = {
       judul_dokumen: judulDokumen,
       pic: pic,
       kategori: kategori,
+      file: files,
     };
 
     var dataKosong = [];
     for (const key in data) {
-      if (data[key] === null || data[key].match(/^\s*$/) !== null) {
+      if (data[key] === null || data[key].length === 0) {
         dataKosong.push(key.charAt(0).toUpperCase() + key.slice(1));
       }
     }
@@ -90,13 +88,13 @@ const TambahDokumen = () => {
       }
     });
 
-    // if (dataKosong.length === 0) {
-    //   // await DocumentService.addDocument(data);
-    //   // alert(dataKosong + "dokumen berhasil ditambahkan");
-    //   // navigate("/kelola-data/dokumen");
-    // } else {
-    //   alert(dataKosong + " tidak dapat kosong");
-    // }
+    if (dataKosong.length === 0) {
+      await DocumentService.addDocument(formData);
+      alert("Dokumen berhasil ditambahkan");
+      navigate("/kelola-data/dokumen");
+    } else {
+      alert(dataKosong + " tidak dapat kosong");
+    }
 
     try {
     } catch (error) {
@@ -110,13 +108,19 @@ const TambahDokumen = () => {
         component="form"
         sx={{
           ml: 10,
-          pt: 10,
+          pt: 8,
         }}
         noValidate
         autoComplete="off"
         onSubmit={onSubmit}
       >
-        <Typography variant="h4" fontWeight={600}>
+        <Typography
+          variant="h4"
+          fontWeight={600}
+          sx={{
+            mb: 5,
+          }}
+        >
           Tambah Dokumen
         </Typography>
         <Box
@@ -139,9 +143,9 @@ const TambahDokumen = () => {
                 <Typography variant="h6">Upload dokumen anda disini</Typography>
               </>
             ) : (
-              <Box>
-                <img src={files[0].preview}></img>
-              </Box>
+              <>
+                <Typography variant="h6">{files[0].path}</Typography>
+              </>
             )}
           </UploadBox>
         </Box>
@@ -218,11 +222,13 @@ const TambahDokumen = () => {
         >
           <Stack direction="row" spacing={2}>
             {" "}
-            <Button variant="contained" color="error">
-              Cancel
-            </Button>
+            <Link to="/kelola-data/dokumen" style={{ textDecoration: "none" }}>
+              <Button variant="contained" color="error">
+                <Typography variant="subtitle1">Cancel</Typography>
+              </Button>
+            </Link>
             <Button type="submit" variant="contained" color="success">
-              Add
+              <Typography variant="subtitle1">Add</Typography>
             </Button>
           </Stack>
         </Box>
