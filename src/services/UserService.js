@@ -21,7 +21,6 @@ async function editUser(id, data) {
 async function loginUser(data) {
   const body = {};
   const response = await gatewayHelper.http("POST", "login", body, data);
-  console.log(response);
   return response;
 }
 

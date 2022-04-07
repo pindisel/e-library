@@ -9,7 +9,6 @@ import {
   TableBody,
   TablePagination,
   IconButton,
-  Button,
 } from "@mui/material";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { AddEditModal } from "../components";

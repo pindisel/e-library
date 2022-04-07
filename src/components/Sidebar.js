@@ -1,5 +1,4 @@
-import * as React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
@@ -28,7 +27,7 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
 import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
@@ -47,9 +46,16 @@ import icoSup from "../assets/ProfileImage/icoSup.svg";
 //   colPicker = "warning";
 // }
 
-function Sidebar(props) {
-  const logOut = () => {
-    sessionStorage.removeItem("pengguna" && "token");
+const Sidebar = (props) => {
+  const navigate = useNavigate();
+
+  const logOut = async (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("pengguna");
+    sessionStorage.removeItem("token");
+
+    navigate("/dashboard");
+    window.location.reload();
   };
 
   const user = JSON.parse(sessionStorage.getItem("pengguna"));
@@ -81,10 +87,10 @@ function Sidebar(props) {
   const ListItemIconWhite = styled(ListItemIcon)({
     color: "white",
   });
-  const { window } = props;
+  const { windows } = props;
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [open, setOpen] = React.useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const classes = useStyles(theme);
 
   const handleClick = () => {
@@ -207,7 +213,7 @@ function Sidebar(props) {
   );
 
   const container =
-    window !== undefined ? () => window().document.body : undefined;
+    windows !== undefined ? () => windows().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -253,13 +259,7 @@ function Sidebar(props) {
                 <Typography variant="h6" noWrap component="div">
                   {user.level.charAt(0).toUpperCase() + user.level.slice(1)}
                 </Typography>
-                <Button
-                  onClick={() => {
-                    logOut();
-                  }}
-                  variant="contained"
-                  color="error"
-                >
+                <Button onClick={logOut} variant="contained" color="error">
                   logout
                 </Button>
               </Grid>
@@ -313,14 +313,6 @@ function Sidebar(props) {
       </Box>
     </Box>
   );
-}
-
-Sidebar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
 };
 
 export default Sidebar;

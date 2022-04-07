@@ -40,7 +40,7 @@ const AddEditModal = ({ open, handleClose, datas }) => {
         arr[index] = " " + item;
       }
     });
-    console.log(dataKosong);
+    // console.log(dataKosong);
     if (dataKosong.length === 0) {
       if (datas === null) {
         await DocumentService.addDocument(data);
