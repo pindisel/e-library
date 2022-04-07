@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import {
+  Typography,
+  Box,
+  TextField,
+  Stack,
+  Button,
+  styled,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
 import { DocumentService } from "../services/DocumentService";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
+const UploadBox = styled(Box)({
+  height: 150,
+  borderStyle: "solid",
+  borderRadius: 20,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+});
 
 const TambahDokumen = () => {
   const navigate = useNavigate();
   const [judulDokumen, setJudulDokumen] = useState("");
-  const [idPic, setIdPic] = useState("");
-  const [pengarang, setPengarang] = useState("");
-  const [penerbit, setPenerbit] = useState("");
-  const [tahun, setTahun] = useState("");
+  const [pic, setPic] = useState(null);
+  const [kategori, setKategori] = useState("");
   const [files, setFiles] = useState([]);
-  console.log(files);
+  // console.log(files[0]);
   const {
     getRootProps,
     getInputProps,
@@ -25,7 +40,7 @@ const TambahDokumen = () => {
     isDragReject,
   } = useDropzone({
     maxFiles: 1,
-    accept: "image/jpg, image/png, image/jpeg",
+    accept: ".pdf",
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
@@ -47,13 +62,21 @@ const TambahDokumen = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("judul_dokumen", judulDokumen);
+    formData.append("id_pic", pic);
+    formData.append("kategori_dokumen", kategori);
+    formData.append("file", files[0]);
+
+    console.log(Array.from(formData));
+    await DocumentService.addDocument(formData);
+
     const data = {
       judul_dokumen: judulDokumen,
-      // id_pic: idPic,
-      pengarang: pengarang,
-      penerbit: penerbit,
-      tahun: tahun,
+      pic: pic,
+      kategori: kategori,
     };
+
     var dataKosong = [];
     for (const key in data) {
       if (data[key] === null || data[key].match(/^\s*$/) !== null) {
@@ -61,19 +84,19 @@ const TambahDokumen = () => {
       }
     }
 
-    dataKosong.forEach((item, index, arr) => {
+    dataKosong.forEach((UploadBox, index, arr) => {
       if (index !== 0) {
-        arr[index] = " " + item;
+        arr[index] = " " + UploadBox;
       }
     });
 
-    if (dataKosong.length === 0) {
-      await DocumentService.addDocument(data);
-      alert(dataKosong + "dokumen berhasil ditambahkan");
-      navigate("/kelola-data/dokumen");
-    } else {
-      alert(dataKosong + " tidak dapat kosong");
-    }
+    // if (dataKosong.length === 0) {
+    //   // await DocumentService.addDocument(data);
+    //   // alert(dataKosong + "dokumen berhasil ditambahkan");
+    //   // navigate("/kelola-data/dokumen");
+    // } else {
+    //   alert(dataKosong + " tidak dapat kosong");
+    // }
 
     try {
     } catch (error) {
@@ -99,67 +122,10 @@ const TambahDokumen = () => {
         <Box
           sx={{
             maxWidth: 700,
-            m: 2,
+            mb: 3,
           }}
         >
-          <Typography>Judul Dokumen</Typography>
-          <TextField
-            fullWidth
-            required
-            value={judulDokumen}
-            onChange={(e) => setJudulDokumen(e.target.value)}
-          />
-        </Box>
-        <Box
-          sx={{
-            maxWidth: 700,
-            m: 2,
-          }}
-        >
-          <Typography>Pengarang</Typography>
-          <TextField
-            fullWidth
-            required
-            value={pengarang}
-            onChange={(e) => setPengarang(e.target.value)}
-          />
-        </Box>
-        <Box
-          sx={{
-            maxWidth: 700,
-            m: 2,
-          }}
-        >
-          <Typography>Penerbit</Typography>
-          <TextField
-            fullWidth
-            required
-            value={penerbit}
-            onChange={(e) => setPenerbit(e.target.value)}
-          />
-        </Box>
-        <Box
-          sx={{
-            maxWidth: 700,
-            m: 2,
-          }}
-        >
-          <Typography>Tahun</Typography>
-          <TextField
-            fullWidth
-            required
-            value={tahun}
-            onChange={(e) => setTahun(e.target.value.toString())}
-          />
-        </Box>
-        <Box
-          sx={{
-            maxWidth: 700,
-            m: 2,
-          }}
-        >
-          <Typography>Upload Dokumen</Typography>
-          <Box
+          <UploadBox
             {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
             sx={{
               maxWidth: 700,
@@ -169,15 +135,78 @@ const TambahDokumen = () => {
             <input {...getInputProps()} />
             {files.length === 0 ? (
               <>
-                {/* <UploadIcon /> */}
-                <Typography>Klik untuk menjelajahi dokumen anda</Typography>
+                <CloudUploadIcon fontSize="large" color="darkBlue" />
+                <Typography variant="h6">Upload dokumen anda disini</Typography>
               </>
             ) : (
               <Box>
                 <img src={files[0].preview}></img>
               </Box>
             )}
-          </Box>
+          </UploadBox>
+        </Box>
+        <Box
+          sx={{
+            maxWidth: 700,
+            mb: 3,
+          }}
+        >
+          <Typography variant="h5" fontWeight={600} gutterBottom>
+            Judul Dokumen
+          </Typography>
+          <TextField
+            variant="outlined"
+            color="darkBlue"
+            size="small"
+            fullWidth
+            focused
+            onChange={(e) => setJudulDokumen(e.target.value)}
+          />
+        </Box>
+        <Box
+          sx={{
+            maxWidth: 700,
+            mb: 3,
+          }}
+        >
+          <Typography variant="h5" fontWeight={600} gutterBottom>
+            PIC Dokumen
+          </Typography>
+          <TextField
+            variant="outlined"
+            color="darkBlue"
+            size="small"
+            fullWidth
+            focused
+            onChange={(e) => setPic(e.target.value)}
+          />
+        </Box>
+        <Box
+          sx={{
+            maxWidth: 700,
+            mb: 3,
+          }}
+        >
+          <Typography variant="h5" fontWeight={600} gutterBottom>
+            Kategori
+          </Typography>
+          <RadioGroup
+            value={kategori}
+            onChange={(e) => setKategori(e.target.value)}
+          >
+            <Stack direction="row" spacing={2}>
+              <FormControlLabel
+                value="rahasia"
+                control={<Radio />}
+                label="classified"
+              />
+              <FormControlLabel
+                value="tidak rahasia"
+                control={<Radio />}
+                label="non-classified"
+              />
+            </Stack>
+          </RadioGroup>
         </Box>
         <Box
           sx={{
