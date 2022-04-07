@@ -25,6 +25,7 @@ async function loginUser(data) {
   return response;
 }
 
+
 export const UserService = {
   getUser,
   addUser,

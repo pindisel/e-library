@@ -34,6 +34,7 @@ import { useTheme } from "@mui/material/styles";
 import icoAdmin from "../assets/ProfileImage/icoAdmin.svg";
 import icoPeas from "../assets/ProfileImage/icoPeas.svg";
 import icoSup from "../assets/ProfileImage/icoSup.svg";
+import { useNavigate } from "react-router-dom";
 
 // console.log(icoPicker);
 
@@ -48,6 +49,10 @@ import icoSup from "../assets/ProfileImage/icoSup.svg";
 // }
 
 function Sidebar(props) {
+  const logOut = () => {
+    sessionStorage.removeItem("pengguna" && "token");
+  };
+
   const user = JSON.parse(sessionStorage.getItem("pengguna"));
   var icoPicker = user.level;
   const IconPicker = () => {
@@ -249,7 +254,13 @@ function Sidebar(props) {
                 <Typography variant="h6" noWrap component="div">
                   {user.level.charAt(0).toUpperCase() + user.level.slice(1)}
                 </Typography>
-                <Button variant="contained" color="error">
+                <Button
+                  onClick={() => {
+                    logOut();
+                  }}
+                  variant="contained"
+                  color="error"
+                >
                   logout
                 </Button>
               </Grid>
