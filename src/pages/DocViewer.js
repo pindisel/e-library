@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import React from "react";
 // Import Worker
 import { Worker } from "@react-pdf-viewer/core";
 // Import the main Viewer component
