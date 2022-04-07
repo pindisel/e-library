@@ -77,20 +77,6 @@ const KelolaData = () => {
       >
         Data Peminjaman
       </Typography>
-      <Button
-        variant="contained"
-        color="green"
-        startIcon={<AddBoxIcon />}
-        sx={{
-          mt: 5,
-        }}
-        style={{ borderRadius: 10 }}
-        onClick={() => {
-          handleOpen();
-        }}
-      >
-        <Typography variant="subtitle1">Tambah Anggota</Typography>
-      </Button>
 
       <TableContainer>
         <Table>
