@@ -38,13 +38,13 @@ const KelolaData = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [books, setBooks] = useState([]);
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     const fetchBuku = async () => {
       const response = await DocumentService.getDocument();
       const data = response.data;
-      setBooks(data);
+      setDocuments(data);
     };
 
     fetchBuku();
@@ -60,7 +60,7 @@ const KelolaData = () => {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - documents.length) : 0;
 
   return (
     <>
@@ -105,7 +105,7 @@ const KelolaData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books
+            {documents
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data, index) => (
                 <TableRow key={data.id}>
@@ -172,7 +172,7 @@ const KelolaData = () => {
       </TableContainer>
       <TablePagination
         component="div"
-        count={books.length}
+        count={documents.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
