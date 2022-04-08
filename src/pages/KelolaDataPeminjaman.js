@@ -13,7 +13,7 @@ import {
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { AddEditModal } from "../components";
 import { DocumentService } from "../services/DocumentService";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
   const navigate = useNavigate();
@@ -96,7 +96,8 @@ const KelolaData = () => {
             {borrowDoc
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data, index) => (
-                <TableRow key={data.id}>
+                <TableRow key={data.id}  component={Link}
+                to={`/docView/${data.id_peminjaman}`}>
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
