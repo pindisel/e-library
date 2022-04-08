@@ -159,7 +159,7 @@ const Sidebar = (props) => {
                 <ListItemText primary="Data Dokumen" />
               </ListItemButton>
             </Link>
-            {user.level !== "anggota" ? (
+            {user.level === "admin" ? (
               <Link
                 to="/kelola-data/anggota"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -197,17 +197,19 @@ const Sidebar = (props) => {
             <ListItemText primary="Sirkulasi" />
           </ListItemButton>
         </Link>
-        <Link
-          to="/tambah-dokumen"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <ListItemButton>
-            <ListItemIconWhite>
-              <MenuBookIcon />
-            </ListItemIconWhite>
-            <ListItemText primary="Tambah Dokumen" />
-          </ListItemButton>
-        </Link>
+        {user.level === "admin" ? (
+          <Link
+            to="/tambah-dokumen"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItemButton>
+              <ListItemIconWhite>
+                <MenuBookIcon />
+              </ListItemIconWhite>
+              <ListItemText primary="Tambah Dokumen" />
+            </ListItemButton>
+          </Link>
+        ) : null}
       </List>
     </div>
   );

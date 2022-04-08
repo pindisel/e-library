@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Item = styled(Paper)({
   textAlign: "center",
-  height: 250,
+  height: "30vh",
   lineHeight: "60px",
   fontWeight: 600,
   fontSize: "1.75rem",
@@ -31,11 +31,8 @@ const Dashboard = () => {
 
         <Grid
           container
-          rowSpacing={1}
+          rowSpacing={3}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{
-            mt: 5,
-          }}
           style={{ minHeight: "60vh" }}
         >
           <Grid item xs={6}>

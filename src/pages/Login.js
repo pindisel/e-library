@@ -34,7 +34,7 @@ const Login = () => {
         justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
-        <Grid item xs={6} sx={{ p: 15 }}>
+        <Grid item xs={6} sx={{ p: 10 }}>
           <form>
             <Typography
               variant="h4"

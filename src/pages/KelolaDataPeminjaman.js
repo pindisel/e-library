@@ -11,7 +11,9 @@ import {
   IconButton,
 } from "@mui/material";
 import { FiTrash2, FiEdit } from "react-icons/fi";
+// import { TablePaginationUnstyled } from "@mui/base";
 import { AddEditModal } from "../components";
+import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { DocumentService } from "../services/DocumentService";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +22,7 @@ const KelolaData = () => {
 
   const user = JSON.parse(sessionStorage.getItem("pengguna"));
   var id = user.id_user;
-  console.log(id);
+  // console.log(id);
   //Input Modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,7 +41,7 @@ const KelolaData = () => {
     };
 
     fetchBorrow();
-    console.log(borrowDoc);
+    // console.log(borrowDoc);
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -75,42 +77,58 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                No
+                <Typography>No</Typography>
               </TableCell>
               <TableCell align="center" width={100}>
-                Judul Dokumen
+                <Typography>Judul Dokumen</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Nama Anggota
+                <Typography>Nama Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Tanggal Peminjaman
+                <Typography>Tanggal Peminjaman</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Status
+                <Typography>Status</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log(borrowDoc[0])}
-            {borrowDoc
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((data, index) => (
-                <TableRow key={data.id}>
-                  <TableCell align="center">
-                    {page * rowsPerPage + (index + 1)}
-                  </TableCell>
-                  <TableCell align="center">{data.judul_dokumen}</TableCell>
-                  <TableCell align="center">{data.nama}</TableCell>
-                  <TableCell align="center">
-                    {new Date(data.tanggal_peminjaman).toDateString()}
-                  </TableCell>
-                  <TableCell align="center">
-                    {data.konfirmasi.charAt(0).toUpperCase() +
-                      data.konfirmasi.slice(1)}
-                  </TableCell>
-                </TableRow>
-              ))}
+            {borrowDoc.length === 0 ? (
+              <TableCell colSpan={5} align="center">
+                <Typography>Tidak ada dokumen yang dipinjam</Typography>
+              </TableCell>
+            ) : (
+              borrowDoc
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((data, index) => (
+                  <TableRow key={data.id}>
+                    <TableCell align="center">
+                      <Typography>
+                        {page * rowsPerPage + (index + 1)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{data.judul_dokumen}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>{data.nama}</Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>
+                        {new Date(data.tanggal_peminjaman).toDateString()}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography>
+                        {data.konfirmasi.charAt(0).toUpperCase() +
+                          data.konfirmasi.slice(1)}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ))
+            )}
+
             <AddEditModal
               open={open}
               handleClose={() => handleClose()}

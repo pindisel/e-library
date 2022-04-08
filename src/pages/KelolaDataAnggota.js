@@ -59,22 +59,22 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                No
+                <Typography>No</Typography>
               </TableCell>
               <TableCell align="center" width={100}>
-                Id Anggota
+                <Typography>Id Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Nama Anggota
+                <Typography>Nama Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Username
+                <Typography>Username</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Level Anggota
+                <Typography>Level Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={50}>
-                Jenis Kelamin
+                <Typography>Jenis Kelamin</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -86,11 +86,21 @@ const KelolaData = () => {
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
-                  <TableCell align="center">{data.id_user}</TableCell>
-                  <TableCell align="center">{data.nama}</TableCell>
-                  <TableCell align="center">{data.level}</TableCell>
-                  <TableCell align="center">{data.unit_kerja}</TableCell>
-                  <TableCell align="center">{data.jenis_kelamin}</TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.id_user}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.nama}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.level}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.unit_kerja}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.jenis_kelamin}</Typography>
+                  </TableCell>
                 </TableRow>
               ))}
             {emptyRows > 0 && (

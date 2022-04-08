@@ -80,25 +80,25 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                No
+                <Typography>No</Typography>
               </TableCell>
               <TableCell align="center" width={100}>
-                Id
+                <Typography>Id</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Judul Dokumen
+                <Typography>Judul Dokumen</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                PIC
+                <Typography>PIC</Typography>
               </TableCell>
               <TableCell align="center" width={50}>
-                Kategori
+                <Typography>Kategori</Typography>
               </TableCell>
               <TableCell align="center" width={150}>
-                Kelola
+                <Typography>Kelola</Typography>
               </TableCell>
               <TableCell align="center" width={150}>
-                Pinjam?
+                <Typography>Pinjam?</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -110,10 +110,18 @@ const KelolaData = () => {
                   <TableCell align="center">
                     {page * rowsPerPage + (index + 1)}
                   </TableCell>
-                  <TableCell align="center">{data.id_dokumen}</TableCell>
-                  <TableCell align="center">{data.judul_dokumen}</TableCell>
-                  <TableCell align="center">{data.id_pic}</TableCell>
-                  <TableCell align="center">{data.kategori_dokumen}</TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.id_dokumen}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.judul_dokumen}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.id_pic}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{data.kategori_dokumen}</Typography>
+                  </TableCell>
                   <TableCell align="center">
                     {/* <IconButton
                       color="green"
