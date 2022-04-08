@@ -15,7 +15,7 @@ import { FiTrash2, FiEdit } from "react-icons/fi";
 import { AddEditModal } from "../components";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { DocumentService } from "../services/DocumentService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
   const navigate = useNavigate();

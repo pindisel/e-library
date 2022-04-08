@@ -83,7 +83,7 @@ function App() {
                   path="/kelola-data/peminjaman"
                   element={<KelolaDataPeminjaman />}
                 />
-                <Route exact path="/docView" element={<DocViewer />} />
+                <Route exact path="/docView/:id" element={<DocViewer />} />
                 <Route
                   exact
                   path="/*"

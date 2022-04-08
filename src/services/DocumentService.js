@@ -46,6 +46,16 @@ async function getBorrowedSuper(id) {
   return response;
 }
 
+async function viewDocument(id) {
+  const body = {};
+  const response = await gatewayHelper.http(
+    "GET",
+    `peminjaman/detail/${id}`,
+    body
+  );
+  return response;
+}
+
 async function editStatus(id, data) {
   const body = {};
   const response = await gatewayHelper.http(
@@ -66,4 +76,5 @@ export const DocumentService = {
   getBorrowedDocument,
   getBorrowedSuper,
   editStatus,
+  viewDocument,
 };
