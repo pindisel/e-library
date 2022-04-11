@@ -117,7 +117,7 @@ const KelolaData = () => {
                     <Typography>{data.judul_dokumen}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.id_pic}</Typography>
+                    <Typography>{data.nama_pic}</Typography>
                   </TableCell>
                   <TableCell align="center">
                     <Typography>{data.kategori_dokumen}</Typography>
@@ -155,15 +155,6 @@ const KelolaData = () => {
               handleClose={() => handleClose()}
               datas={dataModal}
             /> */}
-            {emptyRows > 0 && (
-              <TableRow
-                style={{
-                  height: 73 * emptyRows,
-                }}
-              >
-                <TableCell colSpan={7} />
-              </TableRow>
-            )}
             {emptyRows > 0 && (
               <TableRow
                 style={{

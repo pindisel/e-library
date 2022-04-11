@@ -6,6 +6,12 @@ async function getDocument() {
   return response;
 }
 
+async function getSupervisor() {
+  const body = {};
+  const response = await gatewayHelper.http("GET", "pengguna/supervisor", body);
+  return response;
+}
+
 async function addDocument(data) {
   const body = {};
   const response = await gatewayHelper.http("POST", "dokumen", body, data);
@@ -77,4 +83,5 @@ export const DocumentService = {
   getBorrowedSuper,
   editStatus,
   viewDocument,
+  getSupervisor,
 };

@@ -9,6 +9,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  MenuItem,
 } from "@mui/material";
 import { DocumentService } from "../services/DocumentService";
 import { useNavigate, Link } from "react-router-dom";
@@ -26,11 +27,35 @@ const UploadBox = styled(Box)({
 });
 
 const TambahDokumen = () => {
+  const [supervisor, setSupervisor] = useState([]);
+  useEffect(() => {
+    const fetchSupervisor = async () => {
+      const response = await DocumentService.getSupervisor();
+      const data = response.data;
+      setSupervisor(data);
+    };
+
+    fetchSupervisor();
+  }, []);
+
+  console.log(supervisor);
+
   const navigate = useNavigate();
   const [judulDokumen, setJudulDokumen] = useState("");
   const [pic, setPic] = useState(null);
   const [kategori, setKategori] = useState("");
   const [files, setFiles] = useState([]);
+  const [namaPic, setNamaPic] = useState([]);
+
+  const handleChange = (event) => {
+    setPic(event.target.value);
+    supervisor.forEach((element) => {
+      if (element.id_user === event.target.value) {
+        setNamaPic(element.nama);
+      }
+    });
+  };
+  console.log(pic, namaPic);
   // console.log(files[0]);
   const {
     getRootProps,
@@ -63,16 +88,16 @@ const TambahDokumen = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("judul_dokumen", judulDokumen);
     formData.append("id_pic", pic);
+    formData.append("nama_pic", namaPic);
     formData.append("kategori_dokumen", kategori);
     formData.append("file", files[0]);
-
+    console.log(namaPic);
     const data = {
-      judul_dokumen: judulDokumen,
       pic: pic,
       kategori: kategori,
       file: files,
+      nama_pic: namaPic,
     };
 
     var dataKosong = [];
@@ -156,34 +181,26 @@ const TambahDokumen = () => {
           }}
         >
           <Typography variant="h5" fontWeight={600} gutterBottom>
-            Judul Dokumen
-          </Typography>
-          <TextField
-            variant="outlined"
-            color="darkBlue"
-            size="small"
-            fullWidth
-            focused
-            onChange={(e) => setJudulDokumen(e.target.value)}
-          />
-        </Box>
-        <Box
-          sx={{
-            maxWidth: 700,
-            mb: 3,
-          }}
-        >
-          <Typography variant="h5" fontWeight={600} gutterBottom>
             PIC Dokumen
           </Typography>
           <TextField
-            variant="outlined"
-            color="darkBlue"
-            size="small"
             fullWidth
-            focused
-            onChange={(e) => setPic(e.target.value)}
-          />
+            id="outlined-select-currency"
+            select
+            value={pic}
+            onChange={handleChange}
+          >
+            {supervisor.map((option) => (
+              <MenuItem
+                fullWidth
+                key={option.id_user}
+                value={option.id_user}
+                label={option.nama}
+              >
+                {option.nama}
+              </MenuItem>
+            ))}
+          </TextField>
         </Box>
         <Box
           sx={{
