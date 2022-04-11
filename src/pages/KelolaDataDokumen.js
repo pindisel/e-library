@@ -19,20 +19,9 @@ import { Link, useNavigate } from "react-router-dom";
 const KelolaData = () => {
   const navigate = useNavigate();
   const deleteDocument = async (id) => {
-    try {
-      await fetch(`https://elibrary-back.herokuapp.com/dokumen/${id}`, {
-        method: "DELETE",
-      });
-      navigate("/kelola-data/dokumen");
-    } catch (err) {
-      console.error(err.message);
-    }
+    await DocumentService.deleteDocument(id);
+    navigate("kelola-data/dokumen");
   };
-
-  //Input Modal
-  // const [open, setOpen] = useState(false);
-  // const handleClose = () => setOpen(false);
-  // const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -80,25 +69,25 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                <Typography>No</Typography>
-              </TableCell>
-              <TableCell align="center" width={100}>
-                <Typography>Id</Typography>
-              </TableCell>
-              <TableCell align="center" width={200}>
-                <Typography>Judul Dokumen</Typography>
-              </TableCell>
-              <TableCell align="center" width={200}>
-                <Typography>PIC</Typography>
+                <Typography variant="h6">No</Typography>
               </TableCell>
               <TableCell align="center" width={50}>
-                <Typography>Kategori</Typography>
+                <Typography variant="h6">Id</Typography>
+              </TableCell>
+              <TableCell align="center" width={200}>
+                <Typography variant="h6">Judul Dokumen</Typography>
+              </TableCell>
+              <TableCell align="center" width={200}>
+                <Typography variant="h6">PIC</Typography>
+              </TableCell>
+              <TableCell align="center" width={50}>
+                <Typography variant="h6">Kategori</Typography>
               </TableCell>
               <TableCell align="center" width={150}>
-                <Typography>Kelola</Typography>
+                <Typography variant="h6">Kelola</Typography>
               </TableCell>
               <TableCell align="center" width={150}>
-                <Typography>Pinjam?</Typography>
+                <Typography variant="h6">Pinjam?</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -133,7 +122,7 @@ const KelolaData = () => {
                       <FiEdit />
                     </IconButton> */}
                     <IconButton
-                      onClick={() => deleteDocument(data.id)}
+                      onClick={() => deleteDocument(data.id_dokumen)}
                       color="error"
                     >
                       <FiTrash2 />
@@ -155,15 +144,6 @@ const KelolaData = () => {
               handleClose={() => handleClose()}
               datas={dataModal}
             /> */}
-            {emptyRows > 0 && (
-              <TableRow
-                style={{
-                  height: 73 * emptyRows,
-                }}
-              >
-                <TableCell colSpan={7} />
-              </TableRow>
-            )}
             {emptyRows > 0 && (
               <TableRow
                 style={{

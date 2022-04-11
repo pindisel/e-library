@@ -12,9 +12,9 @@ async function addDocument(data) {
   return response;
 }
 
-async function editBooks(id, data) {
+async function deleteDocument(id) {
   const body = {};
-  const response = await gatewayHelper.http("PUT", `dokumen/${id}`, body, data);
+  const response = await gatewayHelper.http("DELETE", `dokumen/${id}`, body);
   return response;
 }
 
@@ -70,7 +70,7 @@ async function editStatus(id, data) {
 export const DocumentService = {
   getDocument,
   addDocument,
-  editBooks,
+  deleteDocument,
   getDocumentById,
   borrowDocument,
   getBorrowedDocument,
