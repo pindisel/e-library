@@ -9,8 +9,8 @@ const KonfirmasiUser = () => {
   // console.log(user);
   const [document, setDocument] = useState([]);
   const navigate = useNavigate();
-  console.log(id);
-  console.log(user.id_user);
+  // console.log(id);
+  // console.log(user.id_user);
 
   const borrow = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ const KonfirmasiUser = () => {
     };
     fetchBuku();
   }, [id]);
-  console.log(document);
+  // console.log(document);
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" fontWeight={600} gutterBottom>

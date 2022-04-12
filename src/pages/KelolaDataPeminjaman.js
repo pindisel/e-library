@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const KelolaData = () => {
   const user = JSON.parse(sessionStorage.getItem("pengguna"));
   var id = user.id_user;
-  console.log(id);
+  // console.log(id);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -82,7 +82,7 @@ const KelolaData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log(borrowDoc[0])}
+            {/* {console.log(borrowDoc[0])} */}
             {borrowDoc
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data, index) => (
