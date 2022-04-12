@@ -49,7 +49,7 @@ const Sirkulasi = () => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - documents.length) : 0;
 
-  console.log(documents);
+  // console.log(documents);
   return (
     <>
       <Typography variant="h4" fontWeight={600} gutterBottom>
