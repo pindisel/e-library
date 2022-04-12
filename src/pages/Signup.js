@@ -10,9 +10,12 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UserService } from "../services/UserService";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const levels = [
   {
@@ -53,6 +56,11 @@ const Signup = () => {
   const [jenisKelamin, setJenisKelamin] = useState("");
   const [noKtp, setNoKtp] = useState("");
   const [unitKerja, setUnitKerja] = useState("");
+  const [showPass, setShowPass] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPass(!showPass);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -177,7 +185,7 @@ const Signup = () => {
               variant="outlined"
               color="darkBlue"
               size="small"
-              type="password"
+              type={showPass ? "text" : "password"}
               fullWidth
               focused
               error={password.length < 8 && password.length >= 1}
@@ -187,6 +195,15 @@ const Signup = () => {
                   : ""
               }
               onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword}>
+                      {showPass ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Typography variant="h5" fontWeight={600} gutterBottom>
               No. KTP

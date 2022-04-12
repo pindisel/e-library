@@ -59,22 +59,22 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                <Typography>No</Typography>
+                <Typography variant="h6">No</Typography>
               </TableCell>
               <TableCell align="center" width={100}>
-                <Typography>Id Anggota</Typography>
+                <Typography variant="h6">Id Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                <Typography>Nama Anggota</Typography>
+                <Typography variant="h6">Nama Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                <Typography>Username</Typography>
+                <Typography variant="h6">Username</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                <Typography>Level Anggota</Typography>
+                <Typography variant="h6">Level Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={50}>
-                <Typography>Jenis Kelamin</Typography>
+                <Typography variant="h6">Jenis Kelamin</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -84,22 +84,28 @@ const KelolaData = () => {
               .map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell align="center">
-                    {page * rowsPerPage + (index + 1)}
+                    <Typography variant="subtitle1">
+                      {page * rowsPerPage + (index + 1)}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.id_user}</Typography>
+                    <Typography variant="subtitle1">{data.id_user}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.nama}</Typography>
+                    <Typography variant="subtitle1">{data.nama}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.level}</Typography>
+                    <Typography variant="subtitle1">{data.level}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.unit_kerja}</Typography>
+                    <Typography variant="subtitle1">
+                      {data.unit_kerja}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.jenis_kelamin}</Typography>
+                    <Typography variant="subtitle1">
+                      {data.jenis_kelamin}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               ))}

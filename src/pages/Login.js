@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Button, TextField, Typography, Box, Grid } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  Grid,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { UserService } from "../services/UserService";
 
@@ -8,6 +17,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
   // console.log(email);
   // console.log(password);
 
@@ -24,6 +34,10 @@ const Login = () => {
 
     navigate("/dashboard");
     window.location.reload();
+  };
+
+  const handleShowPassword = () => {
+    setShowPass(!showPass);
   };
 
   return (
@@ -64,10 +78,19 @@ const Login = () => {
               variant="outlined"
               color="darkBlue"
               size="small"
-              type="password"
+              type={showPass ? "text" : "password"}
               fullWidth
               focused
               onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword}>
+                      {showPass ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               variant="contained"

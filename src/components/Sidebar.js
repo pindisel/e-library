@@ -186,17 +186,19 @@ const Sidebar = (props) => {
             </Link>
           </List>
         </Collapse>{" "}
-        <Link
-          to="/sirkulasi"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <ListItemButton>
-            <ListItemIconWhite>
-              <ChangeCircleIcon />
-            </ListItemIconWhite>
-            <ListItemText primary="Sirkulasi" />
-          </ListItemButton>
-        </Link>
+        {user.level === "supervisor" ? (
+          <Link
+            to="/sirkulasi"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItemButton>
+              <ListItemIconWhite>
+                <ChangeCircleIcon />
+              </ListItemIconWhite>
+              <ListItemText primary="Sirkulasi" />
+            </ListItemButton>
+          </Link>
+        ) : null}
         {user.level === "admin" ? (
           <Link
             to="/tambah-dokumen"
@@ -277,7 +279,6 @@ const Sidebar = (props) => {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"

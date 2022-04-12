@@ -126,7 +126,7 @@ const KonfirmasiUser = () => {
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={borrow} variant="contained" color="success">
+              <Button onClick={borrow} variant="contained" color="green">
                 Continue
               </Button>
             </Grid>

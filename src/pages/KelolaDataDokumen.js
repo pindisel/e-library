@@ -12,7 +12,6 @@ import {
   Button,
 } from "@mui/material";
 import { FiTrash2 } from "react-icons/fi";
-// import { AddEditModal } from "../components";
 import { DocumentService } from "../services/DocumentService";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -77,17 +76,17 @@ const KelolaData = () => {
               <TableCell align="center" width={200}>
                 <Typography variant="h6">Judul Dokumen</Typography>
               </TableCell>
-              <TableCell align="center" width={200}>
+              <TableCell align="center" width={100}>
                 <Typography variant="h6">PIC</Typography>
               </TableCell>
               <TableCell align="center" width={50}>
                 <Typography variant="h6">Kategori</Typography>
               </TableCell>
-              <TableCell align="center" width={150}>
+              <TableCell align="center" width={50}>
                 <Typography variant="h6">Kelola</Typography>
               </TableCell>
-              <TableCell align="center" width={150}>
-                <Typography variant="h6">Pinjam?</Typography>
+              <TableCell align="center" width={50}>
+                <Typography variant="h6">Pinjam</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -97,30 +96,29 @@ const KelolaData = () => {
               .map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell align="center">
-                    {page * rowsPerPage + (index + 1)}
+                    <Typography variant="subtitle1">
+                      {page * rowsPerPage + (index + 1)}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.id_dokumen}</Typography>
+                    <Typography variant="subtitle1">
+                      {data.id_dokumen}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.judul_dokumen}</Typography>
+                    <Typography variant="subtitle1">
+                      {data.judul_dokumen}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.nama_pic}</Typography>
+                    <Typography variant="subtitle1">{data.nama_pic}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography>{data.kategori_dokumen}</Typography>
+                    <Typography variant="subtitle1">
+                      {data.kategori_dokumen}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    {/* <IconButton
-                      color="green"
-                      onClick={() => {
-                        setDataModal(data);
-                        handleOpen();
-                      }}
-                    >
-                      <FiEdit />
-                    </IconButton> */}
                     <IconButton
                       onClick={() => deleteDocument(data.id_dokumen)}
                       color="error"
@@ -133,17 +131,13 @@ const KelolaData = () => {
                       component={Link}
                       to={`/konfirmasi-peminjaman/dokumen/${data.id_dokumen}`}
                       variant="contained"
+                      color="green"
                     >
                       <Typography variant="subtitle1">Pinjam</Typography>
                     </Button>
                   </TableCell>
                 </TableRow>
               ))}
-            {/* <AddEditModal
-              open={open}
-              handleClose={() => handleClose()}
-              datas={dataModal}
-            /> */}
             {emptyRows > 0 && (
               <TableRow
                 style={{

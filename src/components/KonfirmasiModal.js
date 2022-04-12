@@ -53,13 +53,43 @@ const KonfirmasiModal = ({ open, handleClose, datas }) => {
         aria-describedby="modal-modal-description"
       >
         <Box component="form" sx={ModalBoxStyle} noValidate autoComplete="off">
-          <Typography>Nama Peminjam</Typography>
-          <Typography>{nama}</Typography>
-          <Typography>Judul Dokumen yang Dipinjam</Typography>
-          <Typography>{judulDokumen}</Typography>
-          <Typography>Tanggal Peminjaman</Typography>
-          <Typography>{new Date(tanggal).toDateString()}</Typography>
-          <Stack direction="row" spacing={2}>
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              color: (theme) => theme.palette.darkBlue.main,
+            }}
+          >
+            Nama Peminjam
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+            {nama}
+          </Typography>
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              color: (theme) => theme.palette.darkBlue.main,
+            }}
+          >
+            Judul Dokumen yang Dipinjam
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+            {judulDokumen}
+          </Typography>
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              color: (theme) => theme.palette.darkBlue.main,
+            }}
+          >
+            Tanggal Peminjaman
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+            {new Date(tanggal).toDateString()}
+          </Typography>
+          <Stack direction="row" spacing={2} justifyContent="flex-end">
             {" "}
             <Button variant="contained" color="error" onClick={handleDecline}>
               <Typography variant="subtitle1">Decline</Typography>
@@ -67,7 +97,7 @@ const KonfirmasiModal = ({ open, handleClose, datas }) => {
             <Button
               type="submit"
               variant="contained"
-              color="success"
+              color="green"
               onClick={handleConfirm}
             >
               <Typography variant="subtitle1">Continue</Typography>

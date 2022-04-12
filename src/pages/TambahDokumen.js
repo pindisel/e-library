@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Typography,
   Box,
-  TextField,
   Stack,
   Button,
   styled,
@@ -10,6 +9,7 @@ import {
   FormControlLabel,
   Radio,
   MenuItem,
+  Select,
 } from "@mui/material";
 import { DocumentService } from "../services/DocumentService";
 import { useNavigate, Link } from "react-router-dom";
@@ -38,10 +38,9 @@ const TambahDokumen = () => {
     fetchSupervisor();
   }, []);
 
-  console.log(supervisor);
+  // console.log(supervisor);
 
   const navigate = useNavigate();
-  const [judulDokumen, setJudulDokumen] = useState("");
   const [pic, setPic] = useState(null);
   const [kategori, setKategori] = useState("");
   const [files, setFiles] = useState([]);
@@ -55,7 +54,7 @@ const TambahDokumen = () => {
       }
     });
   };
-  console.log(pic, namaPic);
+  // console.log(pic, namaPic);
   // console.log(files[0]);
   const {
     getRootProps,
@@ -92,7 +91,7 @@ const TambahDokumen = () => {
     formData.append("nama_pic", namaPic);
     formData.append("kategori_dokumen", kategori);
     formData.append("file", files[0]);
-    console.log(namaPic);
+    // console.log(namaPic);
     const data = {
       pic: pic,
       kategori: kategori,
@@ -183,13 +182,7 @@ const TambahDokumen = () => {
           <Typography variant="h5" fontWeight={600} gutterBottom>
             PIC Dokumen
           </Typography>
-          <TextField
-            fullWidth
-            id="outlined-select-currency"
-            select
-            value={pic}
-            onChange={handleChange}
-          >
+          <Select fullWidth value={pic} onChange={handleChange} size="small">
             {supervisor.map((option) => (
               <MenuItem
                 fullWidth
@@ -200,7 +193,7 @@ const TambahDokumen = () => {
                 {option.nama}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Box>
         <Box
           sx={{
@@ -244,7 +237,7 @@ const TambahDokumen = () => {
                 <Typography variant="subtitle1">Cancel</Typography>
               </Button>
             </Link>
-            <Button type="submit" variant="contained" color="success">
+            <Button type="submit" variant="contained" color="green">
               <Typography variant="subtitle1">Add</Typography>
             </Button>
           </Stack>

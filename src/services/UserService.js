@@ -12,22 +12,14 @@ async function addUser(data) {
   return response;
 }
 
-async function editUser(id, data) {
-  const body = {};
-  const response = await gatewayHelper.http("PUT", `buku/${id}`, body, data);
-  return response;
-}
-
 async function loginUser(data) {
   const body = {};
   const response = await gatewayHelper.http("POST", "login", body, data);
   return response;
 }
 
-
 export const UserService = {
   getUser,
   addUser,
-  editUser,
   loginUser,
 };

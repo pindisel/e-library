@@ -10,13 +10,10 @@ import {
   TablePagination,
   Button,
 } from "@mui/material";
-import { useNavigate, Link } from "react-router-dom";
 import { DocumentService } from "../services/DocumentService";
 import { KonfirmasiModal } from "../components";
 
 const Sirkulasi = () => {
-  const navigate = useNavigate();
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,7 +35,7 @@ const Sirkulasi = () => {
     };
 
     fetchBuku();
-  }, []);
+  }, [id]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -52,6 +49,7 @@ const Sirkulasi = () => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - documents.length) : 0;
 
+  console.log(documents);
   return (
     <>
       <Typography variant="h4" fontWeight={600} gutterBottom>
@@ -71,22 +69,22 @@ const Sirkulasi = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center" width={50}>
-                No
+              <TableCell align="center">
+                <Typography variant="h6">No</Typography>
               </TableCell>
-              <TableCell align="center" width={100}>
-                Judul Dokumen
+              <TableCell align="center">
+                <Typography variant="h6">Judul Dokumen</Typography>
               </TableCell>
-              <TableCell align="center" width={200}>
-                Nama Peminjam
+              <TableCell align="center">
+                <Typography variant="h6">Nama Peminjam</Typography>
               </TableCell>
-              <TableCell align="center" width={200}>
-                Tanggal Peminjaman
+              <TableCell align="center">
+                <Typography variant="h6">Tanggal Peminjaman</Typography>
               </TableCell>
-              <TableCell align="center" width={200}>
-                Status
+              <TableCell align="center">
+                <Typography variant="h6">Status</Typography>
               </TableCell>
-              <TableCell align="center" width={150}></TableCell>
+              <TableCell align="center" variant="h6" />
             </TableRow>
           </TableHead>
           <TableBody>
@@ -95,28 +93,46 @@ const Sirkulasi = () => {
               .map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell align="center">
-                    {page * rowsPerPage + (index + 1)}
-                  </TableCell>
-                  <TableCell align="center">{data.judul_dokumen}</TableCell>
-                  <TableCell align="center">{data.nama}</TableCell>
-                  <TableCell align="center">
-                    {new Date(data.tanggal_peminjaman).toDateString()}
+                    <Typography variant="subtitle1">
+                      {page * rowsPerPage + (index + 1)}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    {data.konfirmasi.charAt(0).toUpperCase() +
-                      data.konfirmasi.slice(1)}
+                    <Typography variant="subtitle1">
+                      {data.judul_dokumen}
+                    </Typography>
                   </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="darkBlue"
-                      onClick={() => {
-                        setDataModal(data);
-                        handleOpen();
-                      }}
-                    >
-                      <Typography variant="subtitle1">Confirm</Typography>
-                    </Button>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">{data.nama}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">
+                      {new Date(data.tanggal_peminjaman).toDateString()}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">
+                      {data.konfirmasi.charAt(0).toUpperCase() +
+                        data.konfirmasi.slice(1)}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    {data.konfirmasi !== "diterima" ? (
+                      <Button
+                        variant="contained"
+                        color="darkBlue"
+                        onClick={() => {
+                          setDataModal(data);
+                          handleOpen();
+                        }}
+                      >
+                        <Typography variant="subtitle1">Confirm</Typography>
+                      </Button>
+                    ) : (
+                      <Button variant="disabled">
+                        <Typography variant="subtitle1">Confirmed</Typography>
+                      </Button>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

@@ -8,29 +8,19 @@ import {
   TableCell,
   TableBody,
   TablePagination,
-  IconButton,
 } from "@mui/material";
-import { FiTrash2, FiEdit } from "react-icons/fi";
-import { AddEditModal } from "../components";
 import { DocumentService } from "../services/DocumentService";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const KelolaData = () => {
-  const navigate = useNavigate();
-
   const user = JSON.parse(sessionStorage.getItem("pengguna"));
   var id = user.id_user;
   console.log(id);
-  //Input Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [dataModal, setDataModal] = useState(null);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [borrowDoc, setborrowDoc] = useState([]);
-  const date = new Date();
+
   useEffect(() => {
     const fetchBorrow = async () => {
       const response = await DocumentService.getBorrowedDocument(id);
@@ -39,9 +29,8 @@ const KelolaData = () => {
     };
 
     fetchBorrow();
-    console.log(borrowDoc);
-  }, []);
-
+    // console.log(borrowDoc);
+  }, [id]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -76,19 +65,19 @@ const KelolaData = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" width={50}>
-                No
+                <Typography variant="h6">No</Typography>
               </TableCell>
               <TableCell align="center" width={100}>
-                Judul Dokumen
+                <Typography variant="h6">Judul Dokumen</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Nama Anggota
+                <Typography variant="h6">Nama Anggota</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Tanggal Peminjaman
+                <Typography variant="h6">Tanggal Peminjaman</Typography>
               </TableCell>
               <TableCell align="center" width={200}>
-                Status
+                <Typography variant="h6">Status</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -101,26 +90,36 @@ const KelolaData = () => {
                   key={data.id}
                   component={Link}
                   to={`/docView/${data.id_peminjaman}`}
+                  style={{
+                    textDecoration: "none",
+                  }}
                 >
                   <TableCell align="center">
-                    {page * rowsPerPage + (index + 1)}
-                  </TableCell>
-                  <TableCell align="center">{data.judul_dokumen}</TableCell>
-                  <TableCell align="center">{data.nama}</TableCell>
-                  <TableCell align="center">
-                    {new Date(data.tanggal_peminjaman).toDateString()}
+                    <Typography variant="subtitle1">
+                      {page * rowsPerPage + (index + 1)}
+                    </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    {data.konfirmasi.charAt(0).toUpperCase() +
-                      data.konfirmasi.slice(1)}
+                    <Typography variant="subtitle1">
+                      {data.judul_dokumen}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">{data.nama}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">
+                      {new Date(data.tanggal_peminjaman).toDateString()}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography variant="subtitle1">
+                      {data.konfirmasi.charAt(0).toUpperCase() +
+                        data.konfirmasi.slice(1)}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               ))}
-            <AddEditModal
-              open={open}
-              handleClose={() => handleClose()}
-              datas={dataModal}
-            />
             {emptyRows > 0 && (
               <TableRow
                 style={{
