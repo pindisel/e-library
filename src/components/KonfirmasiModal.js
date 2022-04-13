@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Typography, Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { DocumentService } from "../services/DocumentService";
 
 const KonfirmasiModal = ({ open, handleClose, datas }) => {
-  const navigate = useNavigate();
-
   const [nama, setNama] = useState("");
   const [judulDokumen, setJudulDokumen] = useState("");
   const [tanggal, setTanggal] = useState("");

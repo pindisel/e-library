@@ -14,7 +14,6 @@ import {
   Signup,
   TambahDokumen,
   KonfirmasiUser,
-  KonfirmasiSuper,
   KelolaDataPeminjaman,
   DocViewer,
 } from "./pages";

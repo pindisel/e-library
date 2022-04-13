@@ -28,12 +28,20 @@ const Login = () => {
       password: password,
     };
     // console.log(data);
-    const response = await UserService.loginUser(data);
-    sessionStorage.setItem("token", response.data.token);
-    sessionStorage.setItem("pengguna", JSON.stringify(response.data.pengguna));
-
-    navigate("/dashboard");
-    window.location.reload();
+    try {
+      const response = await UserService.loginUser(data);
+      sessionStorage.setItem("token", response.data.token);
+      sessionStorage.setItem(
+        "pengguna",
+        JSON.stringify(response.data.pengguna)
+      );
+      navigate("/dashboard");
+      window.location.reload();
+    } catch (error) {
+      if (error.message.toString().includes("403")) {
+        alert("Email/Password Salah");
+      }
+    }
   };
 
   const handleShowPassword = () => {
