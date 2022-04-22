@@ -11,11 +11,17 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { FiTrash2 } from "react-icons/fi";
+import { FiTrash2, FiEdit } from "react-icons/fi";
 import { DocumentService } from "../services/DocumentService";
 import { Link, useNavigate } from "react-router-dom";
+import { EditModal } from "../components";
 
 const KelolaData = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [dataModal, setDataModal] = useState(null);
+
   const navigate = useNavigate();
   const deleteDocument = async (id) => {
     await DocumentService.deleteDocument(id);
@@ -125,6 +131,15 @@ const KelolaData = () => {
                     >
                       <FiTrash2 />
                     </IconButton>
+                    <IconButton
+                      onClick={() => {
+                        setDataModal(data);
+                        handleOpen();
+                      }}
+                      color="green"
+                    >
+                      <FiEdit />
+                    </IconButton>
                   </TableCell>
                   <TableCell align="center">
                     <Button
@@ -138,6 +153,11 @@ const KelolaData = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            <EditModal
+              open={open}
+              handleClose={() => handleClose()}
+              datas={dataModal}
+            />
             {emptyRows > 0 && (
               <TableRow
                 style={{

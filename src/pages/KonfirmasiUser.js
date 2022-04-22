@@ -126,7 +126,13 @@ const KonfirmasiUser = () => {
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={borrow} variant="contained" color="green">
+              <Button
+                onClick={borrow}
+                variant="contained"
+                color="green"
+                component={Link}
+                to={"/kelola-data/dokumen"}
+              >
                 Continue
               </Button>
             </Grid>

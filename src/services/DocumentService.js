@@ -79,6 +79,12 @@ async function editStatus(id, data) {
   return response;
 }
 
+async function editDocument(id, data) {
+  const body = {};
+  const response = await gatewayHelper.http("PUT", `dokumen/${id}`, body, data);
+  return response;
+}
+
 export const DocumentService = {
   getDocument,
   addDocument,
@@ -91,4 +97,5 @@ export const DocumentService = {
   editStatus,
   viewDocument,
   getSupervisor,
+  editDocument,
 };
