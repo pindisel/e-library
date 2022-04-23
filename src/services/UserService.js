@@ -18,8 +18,15 @@ async function loginUser(data) {
   return response;
 }
 
+async function deleteUser(id) {
+  const body = {};
+  const response = await gatewayHelper.http("DELETE", `pengguna/${id}`, body);
+  return response;
+}
+
 export const UserService = {
   getUser,
   addUser,
   loginUser,
+  deleteUser,
 };

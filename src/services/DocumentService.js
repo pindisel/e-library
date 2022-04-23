@@ -30,6 +30,12 @@ async function getDocumentById(id) {
   return response;
 }
 
+async function getAllBorrowedDocument() {
+  const body = {};
+  const response = await gatewayHelper.http("GET", `peminjaman`, body);
+  return response;
+}
+
 async function borrowDocument(data) {
   const body = {};
   const response = await gatewayHelper.http("POST", "peminjaman", body, data);
@@ -73,15 +79,23 @@ async function editStatus(id, data) {
   return response;
 }
 
+async function editDocument(id, data) {
+  const body = {};
+  const response = await gatewayHelper.http("PUT", `dokumen/${id}`, body, data);
+  return response;
+}
+
 export const DocumentService = {
   getDocument,
   addDocument,
   deleteDocument,
   getDocumentById,
   borrowDocument,
+  getAllBorrowedDocument,
   getBorrowedDocument,
   getBorrowedSuper,
   editStatus,
   viewDocument,
   getSupervisor,
+  editDocument,
 };

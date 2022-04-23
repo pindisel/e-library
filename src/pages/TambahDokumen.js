@@ -225,12 +225,10 @@ const TambahDokumen = () => {
         <Box
           sx={{
             maxWidth: 700,
-            m: 2,
             mt: 7,
-            pl: 69,
           }}
         >
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} justifyContent="flex-end">
             {" "}
             <Link to="/kelola-data/dokumen" style={{ textDecoration: "none" }}>
               <Button variant="contained" color="error">

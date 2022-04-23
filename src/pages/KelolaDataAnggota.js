@@ -8,13 +8,22 @@ import {
   TableCell,
   TableBody,
   TablePagination,
+  IconButton,
 } from "@mui/material";
 import { UserService } from "../services/UserService";
+import { FiTrash2 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const KelolaData = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [user, setUser] = useState([]);
+
+  const navigate = useNavigate();
+  const deleteUser = async (id) => {
+    await UserService.deleteUser(id);
+    navigate("kelola-data/anggota");
+  };
 
   // console.log(user);
   useEffect(() => {
@@ -76,6 +85,9 @@ const KelolaData = () => {
               <TableCell align="center" width={50}>
                 <Typography variant="h6">Jenis Kelamin</Typography>
               </TableCell>
+              <TableCell align="center" width={50}>
+                <Typography variant="h6">Kelola</Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,6 +118,15 @@ const KelolaData = () => {
                     <Typography variant="subtitle1">
                       {data.jenis_kelamin}
                     </Typography>
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <IconButton
+                      onClick={() => deleteUser(data.id_user)}
+                      color="error"
+                    >
+                      <FiTrash2 />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
