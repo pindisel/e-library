@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Grid, Container, styled, Paper } from "@mui/material";
+import { Typography, Grid, Container, styled, Paper, Box, Stack} from "@mui/material";
 import { Link } from "react-router-dom";
 import { DocumentService } from "../services/DocumentService";
 import { UserService } from "../services/UserService";
+import StarBorder from "@mui/icons-material/StarBorder";
 
 const Item = styled(Paper)({
   height: "30vh",
@@ -62,29 +63,40 @@ const Dashboard = () => {
           <Grid item xs={6}>
             <Link to="/kelola-data/dokumen" style={{ textDecoration: "none" }}>
               <Item style={{ backgroundColor: "#5396C8", borderRadius: 10 }}>
-                <Typography
-                  style={{
-                    lineHeight: "60px",
-                    fontWeight: 600,
-                    fontSize: "2.25rem",
-                    marginLeft: "50%",
-                  }}
-                >
-                  Dokumen
-                </Typography>
-                <Typography
-                  variant="h4"
-                  fontWeight={600}
-                  style={{
-                    marginTop: "15px",
-                    marginLeft: "50%",
-                    backgroundColor: "#9CD1EF",
-                    padding: "15px",
-                    borderRadius: 10,
-                  }}
-                >
-                  {dokumen}
-                </Typography>
+                <Container>
+                  <Stack direction="row">
+                  <Box style={{ width:"50%"}}>
+                
+                    <StarBorder  style={{ marginTop:"300px",borderRadius:"50%", backgroundColor:"#9CD1EF", height:"100"}}/>
+                   
+                  </Box>
+                  <Box style={{ width:"50%"}}>
+                    <Typography
+                      style={{
+                        lineHeight: "60px",
+                        fontWeight: 600,
+                        fontSize: "2.25rem",
+                        marginLeft: "50%",
+                      }}
+                    >
+                      Dokumen
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      fontWeight={600}
+                      style={{
+                        marginTop: "15px",
+                        marginLeft: "50%",
+                        backgroundColor: "#9CD1EF",
+                        padding: "15px",
+                        borderRadius: 10,
+                      }}
+                    >
+                      {dokumen}
+                    </Typography>
+                  </Box>
+                  </Stack>
+                </Container>
               </Item>
             </Link>
           </Grid>

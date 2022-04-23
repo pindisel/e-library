@@ -41,7 +41,6 @@ const KelolaData = () => {
 
     fetchDokumen();
   }, []);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

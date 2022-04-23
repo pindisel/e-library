@@ -73,7 +73,15 @@ const EditModal = ({ open, handleClose, datas }) => {
     },
     [files]
   );
-
+  const handleChange = (event) => {
+    setPic(event.target.value);
+    supervisor.forEach((element) => {
+      if (element.id_user === event.target.value) {
+        setNamaPic(element.nama);
+      }
+    });
+  };
+  // console.log(pic,namaPic);
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -82,20 +90,11 @@ const EditModal = ({ open, handleClose, datas }) => {
     formData.append("nama_pic", namaPic);
     formData.append("kategori_dokumen", kategori);
     formData.append("file", files[0]);
-
     await DocumentService.editDocument(datas.id_dokumen, formData);
+    console.log(namaPic, pic, judulDokumen);
     navigate("/kelola-data/dokumen");
     handleClose();
     window.location.reload();
-  };
-
-  const handleChange = (element) => {
-    setPic(element.target.value);
-    supervisor.forEach((element) => {
-      if (element.id_user === pic) {
-        setNamaPic(element.nama);
-      }
-    });
   };
 
   const ModalBoxStyle = {
@@ -184,7 +183,6 @@ const EditModal = ({ open, handleClose, datas }) => {
             </Typography>
             <Select
               fullWidth
-              defaultValue={pic}
               onChange={handleChange}
               size="small"
               value={pic}
