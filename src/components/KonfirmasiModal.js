@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Box, Button, Typography, Stack } from "@mui/material";
 import { DocumentService } from "../services/DocumentService";
+import { useNavigate } from "react-router-dom";
 
 const KonfirmasiModal = ({ open, handleClose, datas }) => {
+  const navigate = useNavigate();
   const [nama, setNama] = useState("");
   const [judulDokumen, setJudulDokumen] = useState("");
   const [tanggal, setTanggal] = useState("");
@@ -20,6 +22,9 @@ const KonfirmasiModal = ({ open, handleClose, datas }) => {
       konfirmasi: "diterima",
     };
     await DocumentService.editStatus(datas.id_peminjaman, data);
+    navigate("/sirkulasi");
+    handleClose();
+    window.location.reload();
   };
 
   const handleDecline = async () => {
@@ -27,6 +32,9 @@ const KonfirmasiModal = ({ open, handleClose, datas }) => {
       konfirmasi: "ditolak",
     };
     await DocumentService.editStatus(datas.id_peminjaman, data);
+    navigate("/sirkulasi");
+    handleClose();
+    window.location.reload();
   };
 
   const ModalBoxStyle = {
